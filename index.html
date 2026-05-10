@@ -1,0 +1,2015 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WCMS Exam Answers – BCA 6th Sem</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0f1117;
+    --card: #181c27;
+    --border: #2a2f42;
+    --gold: #f5c842;
+    --gold2: #e0a820;
+    --teal: #4ecdc4;
+    --pink: #ff6b9d;
+    --text: #e8eaf0;
+    --muted: #8892a4;
+    --green: #5eead4;
+    --orange: #fb923c;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Nunito', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+  }
+
+  /* HEADER */
+  header {
+    background: linear-gradient(135deg, #1a1f35 0%, #0f1117 100%);
+    border-bottom: 2px solid var(--gold);
+    padding: 18px 20px 14px;
+    text-align: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 4px 30px rgba(245,200,66,0.1);
+  }
+  .header-badge {
+    display: inline-block;
+    background: var(--gold);
+    color: #0f1117;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border-radius: 20px;
+    margin-bottom: 6px;
+  }
+  header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(18px, 4vw, 28px);
+    color: var(--gold);
+    line-height: 1.2;
+  }
+  header p { color: var(--muted); font-size: 13px; margin-top: 4px; }
+
+  /* SEARCH */
+  .search-bar {
+    padding: 14px 16px;
+    background: #13161f;
+    border-bottom: 1px solid var(--border);
+  }
+  .search-bar input {
+    width: 100%;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 10px 16px;
+    color: var(--text);
+    font-family: 'Nunito', sans-serif;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .search-bar input:focus { border-color: var(--gold); }
+  .search-bar input::placeholder { color: var(--muted); }
+
+  /* PAPER TABS */
+  .paper-tabs {
+    display: flex;
+    background: #13161f;
+    border-bottom: 1px solid var(--border);
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .paper-tab {
+    flex: 1;
+    min-width: 140px;
+    padding: 12px 10px;
+    text-align: center;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 0.5px;
+    color: var(--muted);
+    border-bottom: 3px solid transparent;
+    transition: all 0.2s;
+    white-space: nowrap;
+  }
+  .paper-tab.active { color: var(--gold); border-bottom-color: var(--gold); background: rgba(245,200,66,0.05); }
+  .paper-tab .year-badge {
+    display: block;
+    font-size: 10px;
+    color: var(--muted);
+    font-weight: 600;
+  }
+
+  /* CONTENT */
+  .paper-content { display: none; padding: 16px; max-width: 900px; margin: 0 auto; }
+  .paper-content.active { display: block; }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 20px 0 12px;
+  }
+  .section-header h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    color: var(--text);
+  }
+  .section-pill {
+    background: var(--gold);
+    color: #0f1117;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    padding: 3px 10px;
+    border-radius: 20px;
+  }
+  .section-pill.part-b { background: var(--teal); }
+
+  /* QUESTION CARD */
+  .q-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    margin-bottom: 10px;
+    overflow: hidden;
+    transition: border-color 0.2s;
+  }
+  .q-card:hover { border-color: rgba(245,200,66,0.3); }
+  .q-card.hidden { display: none; }
+
+  .q-header {
+    padding: 14px 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    user-select: none;
+  }
+  .q-num {
+    min-width: 36px;
+    height: 36px;
+    background: linear-gradient(135deg, var(--gold), var(--gold2));
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 12px;
+    color: #0f1117;
+    flex-shrink: 0;
+  }
+  .q-num.part-b-num { background: linear-gradient(135deg, var(--teal), #2ab9af); }
+  .q-num.short-num { background: linear-gradient(135deg, var(--pink), #d44d83); }
+
+  .q-text { flex: 1; }
+  .q-text strong {
+    display: block;
+    font-size: 14px;
+    color: var(--text);
+    line-height: 1.4;
+  }
+  .q-meta {
+    display: flex;
+    gap: 6px;
+    margin-top: 5px;
+    flex-wrap: wrap;
+  }
+  .mark-tag {
+    background: rgba(245,200,66,0.12);
+    color: var(--gold);
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 7px;
+    border-radius: 10px;
+  }
+  .type-tag {
+    background: rgba(78,205,196,0.1);
+    color: var(--teal);
+    font-size: 10px;
+    font-weight: 600;
+    padding: 2px 7px;
+    border-radius: 10px;
+  }
+  .chevron {
+    margin-left: auto;
+    color: var(--muted);
+    font-size: 18px;
+    transition: transform 0.3s;
+    flex-shrink: 0;
+    margin-top: 6px;
+  }
+  .q-card.open .chevron { transform: rotate(180deg); }
+
+  .q-answer {
+    display: none;
+    padding: 0 16px 16px;
+    border-top: 1px solid var(--border);
+  }
+  .q-card.open .q-answer { display: block; }
+
+  /* ANSWER CONTENT STYLES */
+  .ans-intro {
+    background: rgba(245,200,66,0.06);
+    border-left: 3px solid var(--gold);
+    padding: 10px 14px;
+    border-radius: 0 8px 8px 0;
+    margin: 12px 0;
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--text);
+  }
+  .ans-intro.teal { border-left-color: var(--teal); background: rgba(78,205,196,0.06); }
+  .ans-intro.pink { border-left-color: var(--pink); background: rgba(255,107,157,0.06); }
+
+  .ans-list {
+    list-style: none;
+    margin: 10px 0;
+  }
+  .ans-list li {
+    padding: 8px 12px 8px 0;
+    border-bottom: 1px solid rgba(42,47,66,0.6);
+    font-size: 14px;
+    line-height: 1.6;
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+  }
+  .ans-list li:last-child { border-bottom: none; }
+  .bullet {
+    min-width: 22px;
+    height: 22px;
+    background: var(--gold);
+    color: #0f1117;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .bullet.t { background: var(--teal); }
+  .bullet.p { background: var(--pink); }
+  .bullet.o { background: var(--orange); }
+  .bullet.g { background: var(--green); }
+
+  .li-title { font-weight: 700; color: var(--gold); }
+  .li-title.t { color: var(--teal); }
+  .li-title.p { color: var(--pink); }
+  .li-title.o { color: var(--orange); }
+
+  .mini-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin: 10px 0;
+  }
+  .mini-card {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 10px 12px;
+    font-size: 13px;
+  }
+  .mini-card h4 { color: var(--gold); font-size: 12px; margin-bottom: 4px; }
+  .mini-card.t h4 { color: var(--teal); }
+  .mini-card.p h4 { color: var(--pink); }
+  .mini-card.o h4 { color: var(--orange); }
+  .mini-card p { color: var(--muted); font-size: 12px; line-height: 1.5; }
+
+  .compare-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 10px 0;
+    font-size: 13px;
+  }
+  .compare-table th {
+    background: rgba(245,200,66,0.12);
+    color: var(--gold);
+    padding: 8px 12px;
+    text-align: left;
+    font-weight: 700;
+  }
+  .compare-table td {
+    padding: 8px 12px;
+    border-bottom: 1px solid var(--border);
+    color: var(--text);
+    vertical-align: top;
+    line-height: 1.5;
+  }
+  .compare-table tr:last-child td { border-bottom: none; }
+  .compare-table tr:nth-child(even) td { background: rgba(255,255,255,0.02); }
+
+  .key-point {
+    display: inline-block;
+    background: rgba(245,200,66,0.1);
+    border: 1px solid rgba(245,200,66,0.25);
+    color: var(--gold);
+    border-radius: 6px;
+    padding: 3px 9px;
+    font-size: 12px;
+    font-weight: 700;
+    margin: 3px 2px;
+  }
+  .key-point.t { background: rgba(78,205,196,0.1); border-color: rgba(78,205,196,0.25); color: var(--teal); }
+  .key-point.p { background: rgba(255,107,157,0.1); border-color: rgba(255,107,157,0.25); color: var(--pink); }
+
+  .step-list { margin: 10px 0; }
+  .step { display: flex; gap: 10px; margin-bottom: 8px; align-items: flex-start; font-size: 14px; line-height: 1.5; }
+  .step-num {
+    min-width: 24px; height: 24px;
+    background: var(--gold); color: #0f1117;
+    border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    font-size: 11px; font-weight: 700; flex-shrink: 0; margin-top: 1px;
+  }
+  .step-num.t { background: var(--teal); }
+
+  .tip-box {
+    background: rgba(94,234,212,0.06);
+    border: 1px dashed rgba(94,234,212,0.3);
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 13px;
+    color: var(--teal);
+    margin: 10px 0;
+  }
+  .tip-box::before { content: '💡 '; }
+
+  h3 { color: var(--gold); font-size: 14px; margin: 14px 0 6px; }
+  h3.t { color: var(--teal); }
+  h3.p { color: var(--pink); }
+
+  /* STATS BAR */
+  .stats-bar {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    padding: 14px 16px;
+    background: #13161f;
+    border-bottom: 1px solid var(--border);
+    justify-content: center;
+  }
+  .stat-item { text-align: center; }
+  .stat-num { font-family: 'Playfair Display', serif; font-size: 22px; color: var(--gold); font-weight: 700; }
+  .stat-label { font-size: 10px; color: var(--muted); letter-spacing: 0.5px; }
+
+  /* QUICK LINKS */
+  .quick-links {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 14px;
+  }
+  .quick-link {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 5px 12px;
+    font-size: 11px;
+    cursor: pointer;
+    color: var(--muted);
+    transition: all 0.2s;
+  }
+  .quick-link:hover { color: var(--gold); border-color: var(--gold); }
+
+  /* EXPAND ALL BTN */
+  .expand-btn {
+    background: transparent;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    border-radius: 8px;
+    padding: 6px 14px;
+    font-size: 12px;
+    font-family: 'Nunito', sans-serif;
+    cursor: pointer;
+    font-weight: 700;
+    transition: all 0.2s;
+    margin-bottom: 12px;
+  }
+  .expand-btn:hover { background: var(--gold); color: #0f1117; }
+
+  .no-results {
+    text-align: center;
+    padding: 40px 20px;
+    color: var(--muted);
+    display: none;
+  }
+
+  @media (max-width: 480px) {
+    .mini-grid { grid-template-columns: 1fr; }
+    .compare-table th, .compare-table td { padding: 6px 8px; font-size: 12px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-badge">BCA 6th Sem · NEP Scheme</div>
+  <h1>Web Content Management Systems</h1>
+  <p>Complete Answers · Both Previous Year Papers · Exam Ready 🎯</p>
+</header>
+
+<div class="stats-bar">
+  <div class="stat-item"><div class="stat-num">2</div><div class="stat-label">PAPERS</div></div>
+  <div class="stat-item"><div class="stat-num">60</div><div class="stat-label">MAX MARKS</div></div>
+  <div class="stat-item"><div class="stat-num">40+</div><div class="stat-label">ANSWERS</div></div>
+  <div class="stat-item"><div class="stat-num">2.5h</div><div class="stat-label">EXAM TIME</div></div>
+</div>
+
+<div class="search-bar">
+  <input type="text" id="searchInput" placeholder="🔍  Search any topic... (e.g. Joomla, CMS, Hosting)" oninput="searchQuestions()">
+</div>
+
+<div class="paper-tabs">
+  <div class="paper-tab active" onclick="switchPaper('p1')">
+    📄 Paper 1 – MP-299
+    <span class="year-badge">May/June 2025</span>
+  </div>
+  <div class="paper-tab" onclick="switchPaper('p2')">
+    📄 Paper 2 – M-202
+    <span class="year-badge">June/July 2024</span>
+  </div>
+</div>
+
+<!-- ============================================================ PAPER 1 ============================================================ -->
+<div id="p1" class="paper-content active">
+  <div style="padding-top:4px">
+    <button class="expand-btn" onclick="expandAll('p1')">⬇ Expand All Answers</button>
+    <div id="no-results-p1" class="no-results">No questions found. Try a different search term.</div>
+
+    <div class="section-header">
+      <h2>Part – A</h2>
+      <span class="section-pill">5 × 10 = 50 Marks</span>
+    </div>
+
+    <!-- Q1a -->
+    <div class="q-card" id="q-p1-1a" onclick="toggle(this)">
+      <div class="q-header">
+        <div class="q-num">1a</div>
+        <div class="q-text">
+          <strong>Describe the different types of Content Management System (CMS).</strong>
+          <div class="q-meta"><span class="mark-tag">5 Marks</span><span class="type-tag">Part A</span></div>
+        </div>
+        <div class="chevron">▾</div>
+      </div>
+      <div class="q-answer">
+        <div class="ans-intro">A <b>Content Management System (CMS)</b> is software that helps create, manage, and modify digital content on a website without needing technical coding knowledge.</div>
+        <h3>Types of CMS:</h3>
+        <ul class="ans-list">
+          <li><span class="bullet">1</span><div><span class="li-title">Web CMS (WCMS)</span> – Manages web content on websites. Example: WordPress, Joomla, Drupal</div></li>
+          <li><span class="bullet t">2</span><div><span class="li-title t">Enterprise CMS (ECMS)</span> – Used by large organizations to manage documents and records. Example: Microsoft SharePoint</div></li>
+          <li><span class="bullet p">3</span><div><span class="li-title p">Document Management System (DMS)</span> – Manages documents, version control, and file storage</div></li>
+          <li><span class="bullet o">4</span><div><span class="li-title o">Digital Asset Management (DAM)</span> – Manages media assets like images, videos, audio files</div></li>
+          <li><span class="bullet">5</span><div><span class="li-title">Component CMS (CCMS)</span> – Manages content at the component/module level for reuse</div></li>
+          <li><span class="bullet t">6</span><div><span class="li-title t">Learning Management System (LMS)</span> – Manages educational content and online courses. Example: Moodle</div></li>
+          <li><span class="bullet p">7</span><div><span class="li-title p">Mobile CMS</span> – Manages content specifically for mobile apps and responsive sites</div></li>
+        </ul>
+        <div class="tip-box">Remember: WordPress = most popular Web CMS | Moodle = LMS | SharePoint = Enterprise CMS</div>
+      </div>
+    </div>
+
+    <!-- Q1b -->
+    <div class="q-card" id="q-p1-1b" onclick="toggle(this)">
+      <div class="q-header">
+        <div class="q-num">1b</div>
+        <div class="q-text">
+          <strong>Explain the steps for creating and managing digital graphics in CMS.</strong>
+          <div class="q-meta"><span class="mark-tag">5 Marks</span></div>
+        </div>
+        <div class="chevron">▾</div>
+      </div>
+      <div class="q-answer">
+        <div class="ans-intro">Digital graphics in CMS include images, banners, icons, and infographics that visually enhance web content.</div>
+        <h3>Steps:</h3>
+        <div class="step-list">
+          <div class="step"><div class="step-num">1</div><div><b>Planning</b> – Define the purpose, dimensions, target audience</div></div>
+          <div class="step"><div class="step-num">2</div><div><b>Creating</b> – Use design tools like Adobe Photoshop, GIMP, or Canva</div></div>
+          <div class="step"><div class="step-num">3</div><div><b>Optimizing</b> – Compress file size for web (JPEG for photos, PNG for transparency, WebP for best quality)</div></div>
+          <div class="step"><div class="step-num">4</div><div><b>Uploading</b> – Upload to the CMS media library/file manager</div></div>
+          <div class="step"><div class="step-num">5</div><div><b>Organizing</b> – Use folders, tags, and metadata for easy retrieval</div></div>
+          <div class="step"><div class="step-num">6</div><div><b>Editing</b> – Use CMS built-in editors to crop, resize, rotate</div></div>
+          <div class="step"><div class="step-num">7</div><div><b>Publishing</b> – Insert/embed into web pages and posts</div></div>
+          <div class="step"><div class="step-num">8</div><div><b>Managing</b> – Update, replace, or delete outdated graphics regularly</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Q1c -->
+    <div class="q-card" id="q-p1-1c" onclick="toggle(this)">
+      <div class="q-header">
+        <div class="q-num">1c</div>
+        <div class="q-text">
+          <strong>Describe the Guidelines of Content Management.</strong>
+          <div class="q-meta"><span class="mark-tag">5 Marks</span></div>
+        </div>
+        <div class="chevron">▾</div>
+      </div>
+      <div class="q-answer">
+        <div class="ans-intro">Content Management Guidelines are rules and standards that ensure content is created, organized, and maintained effectively.</div>
+        <ul class="ans-list">
+          <li><span class="bullet">1</span><div><span class="li-title">Content Planning</span> – Plan before creating. Define goals, target audience, and content type</div></li>
+          <li><span class="bullet t">2</span><div><span class="li-title t">Consistent Style Guide</span> – Maintain uniform tone, font, color, and branding across all content</div></li>
+          <li><span class="bullet p">3</span><div><span class="li-title p">Version Control</span> – Track all changes; keep backup of previous versions</div></li>
+          <li><span class="bullet o">4</span><div><span class="li-title o">Access Control</span> – Define who can create, edit, approve, and publish content</div></li>
+          <li><span class="bullet">5</span><div><span class="li-title">Approval Workflow</span> – Content must be reviewed and approved before publishing</div></li>
+          <li><span class="bullet t">6</span><div><span class="li-title t">Regular Content Audit</span> – Periodically review and update existing content</div></li>
+          <li><span class="bullet p">7</span><div><span class="li-title p">SEO Guidelines</span> – Use proper keywords, meta tags, headings, and alt text</div></li>
+          <li><span class="bullet o">8</span><div><span class="li-title o">Security & Backup</span> – Regular backups and secure user authentication</div></li>
+          <li><span class="bullet">9</span><div><span class="li-title">Metadata Standards</span> – Add proper titles, descriptions, tags to all content</div></li>
+          <li><span class="bullet t">10</span><div><span class="li-title t">Archiving</span> – Archive old/outdated content rather than permanently deleting</div></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Q1d -->
+    <div class="q-card" id="q-p1-1d" onclick="toggle(this)">
+      <div class="q-header">
+        <div class="q-num">1d</div>
+        <div class="q-text">
+          <strong>Explain audio production and Editing in CMS.</strong>
+          <div class="q-meta"><span class="mark-tag">5 Marks</span></div>
+        </div>
+        <div class="chevron">▾</div>
+      </div>
+      <div class="q-answer">
+        <div class="ans-intro">Audio production in CMS involves recording, editing, and publishing audio content like podcasts, voice-overs, and background music.</div>
+        <div class="mini-grid">
+          <div class="mini-card">
+            <h4>🎙 Production</h4>
+            <p>Script writing → Mic setup → Recording → Raw audio file</p>
+          </div>
+          <div class="mini-card t">
+            <h4>✂️ Editing</h4>
+            <p>Trim, cut, fade in/out, noise reduction, equalization, volume normalization</p>
+          </div>
+          <div class="mini-card p">
+            <h4>🔧 Tools</h4>
+            <p>Audacity (free), Adobe Audition, GarageBand, Reaper</p>
+          </div>
+          <div class="mini-card o">
+            <h4>📤 Formats</h4>
+            <p>MP3 (most common), WAV (high quality), OGG (open source), AAC</p>
+          </div>
+        </div>
+        <h3>CMS Integration Steps:</h3>
+        <ul class="ans-list">
+          <li><span class="bullet">1</span><div>Upload audio file to CMS Media Library</div></li>
+          <li><span class="bullet t">2</span><div>Embed using audio player widget in page/post</div></li>
+          <li><span class="bullet p">3</span><div>Add metadata: title, description, transcript</div></li>
+          <li><span class="bullet o">4</span><div>Optimize for streaming vs download based on use case</div></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Q2a -->
+    <div class="q-card" id="q-p1-2a" onclick="toggle(this)">
+      <div class="q-header">
+        <div class="q-num">2a</div>
+        <div class="q-text">
+          <strong>Explain the different types of Hosting.</strong>
+          <div class="q-meta"><span class="mark-tag">5 Marks</span></div>
+        </div>
+        <div class="chevron">▾</div>
+      </div>
+      <div class="q-answer">
+        <div class="ans-intro">Web Hosting is a service that provides storage space and internet connectivity to make websites accessible online.</div>
+        <ul class="ans-list">
+          <li><span class="bullet">1</span><div><span class="li-title">Shared Hosting</span> – Multiple websites share one server's resources. Cheapest option. Suitable for small websites. Limited performance.</div></li>
+          <li><span class="bullet t">2</span><div><span class="li-title t">VPS (Virtual Private Server)</span> – Physical server divided into virtual servers. Each site gets dedicated resources. More control, moderate cost.</div></li>
+          <li><span class="bullet p">3</span><div><span class="li-title p">Dedicated Hosting</span> – Entire physical server for one website. Maximum performance, full control. Most expensive.</div></li>
+          <li><span class="bullet o">4</span><div><span class="li-title o">Cloud Hosting</span> – Website hosted across multiple servers. Highly scalable. Pay-per-use. Example: AWS, Google Cloud, Azure</div></li>
+          <li><span class="bullet">5</span><div><span class="li-title">Managed Hosting</span> – Provider handles all technical tasks like updates, security, backups</div></li>
+          <li><span class="bullet t">6</span><div><span class="li-title t">Reseller Hosting</span> – Purchase bulk hosting and resell to others; popular for web agencies</div></li>
+          <li><span class="bullet p">7</span><div><span class="li-title p">Colocation Hosting</span> – Own your server hardware but keep it at provider's data center</div></li>
+        </ul>
+        <table class="compare-table" style="margin-top:10px">
+          <tr><th>Type</th><th>Cost</th><th>Performance</th><th>Best For</th></tr>
+          <tr><td>Shared</td><td>₹100–500/mo</td><td>Low</td><td>Blogs, startups</td></tr>
+          <tr><td>VPS</td><td>₹500–3000/mo</td><td>Medium</td><td>Growing sites</td></tr>
+          <tr><td>Dedicated</td><td>₹5000+/mo</td><td>High</td><td>Large enterprises</td></tr>
+          <tr><td>Cloud</td><td>Pay-per-use</td><td>Very High</td><td>Scalable apps</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- Q2b -->
+    <div class="q-card" id="q-p1-2b" onclick="toggle(this)">
+      <div class="q-header">
+        <div class="q-num">2b</div>
+        <div class="q-text">
+          <strong>Describe in detail about creating and maintaining Wikisite.</strong>
+          <div class="q-meta"><span class="mark-tag">5 Marks</span></div>
+        </div>
+        <div class="chevron">▾</div>
+      </div>
+      <div class="q-answer">
+        <div class="ans-intro">A <b>Wikisite</b> is a collaborative website where multiple users can create, edit, and organize content. Most famous example: Wikipedia.</div>
+        <h3>Creating a Wikisite:</h3>
+        <div class="step-list">
+          <div class="step"><div class="step-num t">1</div><div>Choose wiki software (MediaWiki, DokuWiki, Confluence)</div></div>
+          <div class="step"><div class="step-num t">2</div><div>Set up web hosting and register domain name</div></div>
+          <div class="step"><div class="step-num t">3</div><div>Install the wiki software on server</div></div>
+          <div class="step"><div class="step-num t">4</div><div>Configure settings: site name, logo, permissions, user roles</div></div>
+          <div class="step"><div class="step-num t">5</div><div>Create main/home page and navigation structure</div></div>
+          <div class="step"><div class="step-num t">6</div><div>Add initial content with proper categories and links</div></div>
+        </div>
+        <h3 class="t">Maintaining a Wikisite:</h3>
+        <ul class="ans-list">
+          <li><span class="bullet t">✓</span><div>Regularly update and verify content for accuracy</div></li>
+          <li><span class="bullet t">✓</span><div>Monitor for vandalism and spam using recent changes log</div></li>
+          <li><span class="bullet t">✓</span><div>Manage user accounts and permissions</div></li>
+          <li><span class="bullet t">✓</span><div>Perform regular backups of database and files</div></li>
+          <li><span class="bullet t">✓</span><div>Update wiki software for security patches</div></li>
+          <li><span class="bullet t">✓</span><div>Organize pages with proper categories and tags</div></li>
+          <li><span class="bullet t">✓</span><div>Resolve content disputes between editors</div></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Q2c -->
+    <div class="q-card" id="q-p1-2c" onclick="toggle(this)">
+      <div class="q-header">
+        <div class="q-num">2c</div>
+        <div class="q-text">
+          <strong>Explain different Screen Casting techniques.</strong>
+          <div class="q-meta"><span class="mark-tag">5 Marks</span></div>
+        </div>
+        <div class="chevron">▾</div>
+      </div>
+      <div class="q-answer">
+        <div class="ans-intro"><b>Screencasting</b> is the process of recording your computer screen as a video, usually with audio narration, used for tutorials, demos, and online courses.</div>
+        <h3>Techniques:</h3>
+        <ul class="ans-list">
+          <li><span class="bullet">1</span><div><span class="li-title">Full Screen Recording</span> – Captures the entire computer screen. Best for software tutorials showing the complete interface</div></li>
+          <li><span class="bullet t">2</span><div><span class="li-title t">Application Window Recording</span> – Records only a specific application window. Useful for focused demos</div></li>
+          <li><span class="bullet p">3</span><div><span class="li-title p">Region/Custom Area Recording</span> – Records only a selected portion of the screen</div></li>
+          <li><span class="bullet o">4</span><div><span class="li-title o">Webcam Overlay</span> – Records screen + webcam (picture-in-picture). Adds personal connection for viewer</div></li>
+          <li><span class="bullet">5</span><div><span class="li-title">Audio Narration</span> – Voice commentary recorded simultaneously with screen</div></li>
+          <li><span class="bullet t">6</span><div><span class="li-title t">Annotation Technique</span> – Drawing, highlighting, or adding callouts while recording to emphasize key points</div></li>
+        </ul>
+        <div class="mini-grid">
+          <div class="mini-card"><h4>OBS Studio</h4><p>Free, open-source, professional quality, live streaming support</p></div>
+          <div class="mini-card t"><h4>Camtasia</h4><p>Paid, beginner-friendly, built-in editor, annotations</p></div>
+          <div class="mini-card p"><h4>Loom</h4><p>Web-based, instant sharing link, easy to use</p></div>
+          <div class="mini-card o"><h4>Screencast-O-Matic</h4><p>Simple interface, free basic version available</p></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Q2d -->
+    <div class="q-card" id="q-p1-2d" onclick="toggle(this)">
+      <div class="q-header">
+        <div class="q-num">2d</div>
+        <div class="q-text">
+          <strong>Explain different Multilingual Content Development.</strong>
+          <div class="q-meta"><span class="mark-tag">5 Marks</span></div>
+        </div>
+        <div class="chevron">▾</div>
+      </div>
+      <div class="q-answer">
+        <div class="ans-intro"><b>Multilingual Content Development</b> is the process of creating and managing website content in multiple languages to reach a global audience.</div>
+        <h3>Approaches:</h3>
+        <ul class="ans-list">
+          <li><span class="bullet">1</span><div><span class="li-title">Manual Translation</span> – Humans translate content. Most accurate but time-consuming and expensive</div></li>
+          <li><span class="bullet t">2</span><div><span class="li-title t">Machine Translation</span> – Tools like Google Translate auto-translate. Fast but may lack cultural accuracy</div></li>
+          <li><span class="bullet p">3</span><div><span class="li-title p">Professional Translation Services</span> – Certified translators for legal, medical, or sensitive content</div></li>
+          <li><span class="bullet o">4</span><div><span class="li-title o">Localization (L10n)</span> – Not just translation but adapting to local culture, currency, date formats, images</div></li>
+        </ul>
+        <h3>CMS Tools for Multilingual:</h3>
+        <ul class="ans-list">
+          <li><span class="bullet t">•</span><div>WordPress – WPML plugin, Polylang plugin</div></li>
+          <li><span class="bullet t">•</span><div>Drupal – Built-in multilingual modules</div></li>
+          <li><span class="bullet t">•</span><div>Joomla – Language Manager</div></li>
+        </ul>
+        <div class="mini-grid">
+          <div class="mini-card"><h4>Considerations</h4><p>RTL languages (Arabic/Hebrew), character encoding (UTF-8), cultural sensitivity, date/number formats</p></div>
+          <div class="mini-card t"><h4>SEO Benefits</h4><p>Use hreflang tags, separate URLs per language, target local search keywords</p></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Q3a -->
+    <div class="q-card" id="q-p1-3a" onclick="toggle(this)">
+      <div class="q-header">
+        <div class="q-num">3a</div>
+        <div class="q-text">
+          <strong>Describe creating and managing blog sites.</strong>
+          <div class="q-meta"><span class="mark-tag">5 Marks</span></div>
+        </div>
+        <div class="chevron">▾</div>
+      </div>
+      <div class="q-answer">
+        <div class="ans-intro">A <b>blog</b> is a regularly updated website with informational articles (posts) displayed in reverse chronological order. Used for personal expression, business marketing, and education.</div>
+        <h3>Creating a Blog:</h3>
+        <div class="step-list">
+          <div class="step"><div class="step-num">1</div><div>Choose a blogging platform (WordPress, Blogger, Ghost, Medium)</div></div>
+          <div class="step"><div class="step-num">2</div><div>Register a domain name and choose web hosting</div></div>
+          <div class="step"><div class="step-num">3</div><div>Install and configure the blogging software</div></div>
+          <div class="step"><div class="step-num">4</div><div>Select and customize a theme/template</div></div>
+          <div class="step"><div class="step-num">5</div><div>Create categories and define content topics</div></div>
+          <div class="step"><div class="step-num">6</div><div>Write and publish the first blog posts</div></div>
+        </div>
+        <h3>Managing a Blog:</h3>
+        <ul class="ans-list">
+          <li><span class="bullet t">✓</span><div>Maintain a regular posting schedule (consistency is key)</div></li>
+          <li><span class="bullet t">✓</span><div>Moderate comments – approve, reply, or remove spam</div></li>
+          <li><span class="bullet t">✓</span><div>SEO optimization – keywords, meta tags, internal links</div></li>
+          <li><span class="bullet t">✓</span><div>Track performance with Google Analytics</div></li>
+          <li><span class="bullet t">✓</span><div>Update plugins and themes regularly</div></li>
+          <li><span class="bullet t">✓</span><div>Promote on social media platforms</div></li>
+          <li><span class="bullet t">✓</span><div>Regular database backups</div></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Q3b -->
+    <div class="q-card" id="q-p1-3b" onclick="toggle(this)">
+      <div class="q-header">
+        <div class="q-num">3b</div>
+        <div class="q-text">
+          <strong>Explain planning and developing dynamic web content sites.</strong>
+          <div class="q-meta"><span class="mark-tag">5 Marks</span></div>
+        </div>
+        <div class="chevron">▾</div>
+      </div>
+      <div class="q-answer">
+        <div class="ans-intro"><b>Dynamic websites</b> generate content on-the-fly from a database based on user requests. Content changes automatically. Example: Facebook, Amazon, YouTube.</div>
+        <h3>Planning Phase:</h3>
+        <ul class="ans-list">
+          <li><span class="bullet">•</span><div>Define goals, target audience, and type of dynamic features needed</div></li>
+          <li><span class="bullet">•</span><div>Create a site architecture / sitemap</div></li>
+          <li><span class="bullet">•</span><div>Choose CMS or custom framework (Laravel, Django, Node.js)</div></li>
+          <li><span class="bullet">•</span><div>Design wireframes and prototypes</div></li>
+          <li><span class="bullet">•</span><div>Plan the database structure</div></li>
+        </ul>
+        <h3>Development Phase:</h3>
+        <ul class="ans-list">
+          <li><span class="bullet t">1</span><div><b>Backend</b> – Server-side scripting: PHP, Python, Node.js, Ruby</div></li>
+          <li><span class="bullet t">2</span><div><b>Database</b> – MySQL, PostgreSQL, MongoDB for storing dynamic data</div></li>
+          <li><span class="bullet t">3</span><div><b>Frontend</b> – HTML, CSS, JavaScript for presentation</div></li>
+          <li><span class="bullet t">4</span><div><b>Dynamic Features</b> – User login/registration, search, comments, shopping cart, forms</div></li>
+          <li><span class="bullet t">5</span><div><b>Testing</b> – Test all features, security, and performance</div></li>
+          <li><span class="bullet t">6</span><div><b>Deployment</b> – Upload to live server, configure domain and SSL</div></li>
+        </ul>
+        <div class="tip-box">Static = Same HTML for everyone. Dynamic = HTML generated per user from database.</div>
+      </div>
+    </div>
+
+    <!-- Q3c -->
+    <div class="q-card" id="q-p1-3c" onclick="toggle(this)">
+      <div class="q-header">
+        <div class="q-num">3c</div>
+        <div class="q-text">
+          <strong>Explain Website Design using CSS.</strong>
+          <div class="q-meta"><span class="mark-tag">5 Marks</span></div>
+        </div>
+        <div class="chevron">▾</div>
+      </div>
+      <div class="q-answer">
+        <div class="ans-intro"><b>CSS (Cascading Style Sheets)</b> is a stylesheet language that controls the visual presentation of HTML elements on a webpage. It separates design from content.</div>
+        <ul class="ans-list">
+          <li><span class="bullet">1</span><div><span class="li-title">Selectors</span> – Target elements: element (p), class (.menu), id (#header), attribute</div></li>
+          <li><span class="bullet t">2</span><div><span class="li-title t">Box Model</span> – Every element has: Content → Padding → Border → Margin</div></li>
+          <li><span class="bullet p">3</span><div><span class="li-title p">Layout</span> – Flexbox (1D layout), Grid (2D layout) for page structure</div></li>
+          <li><span class="bullet o">4</span><div><span class="li-title o">Typography</span> – font-family, font-size, font-weight, line-height, text-align</div></li>
+          <li><span class="bullet">5</span><div><span class="li-title">Colors & Backgrounds</span> – background-color, color, gradients, background-image</div></li>
+          <li><span class="bullet t">6</span><div><span class="li-title t">Responsive Design</span> – Media queries (@media) to adapt layout for different screen sizes</div></li>
+          <li><span class="bullet p">7</span><div><span class="li-title p">Animations</span> – transition and @keyframes for smooth effects</div></li>
+          <li><span class="bullet o">8</span><div><span class="li-title o">CSS Variables</span> – :root { --color: #fff } for reusable design tokens</div></li>
+        </ul>
+        <div class="mini-grid">
+          <div class="mini-card"><h4>CSS Frameworks</h4><p>Bootstrap, Tailwind CSS, Foundation – pre-built components</p></div>
+          <div class="mini-card t"><h4>3 Ways to Use CSS</h4><p>Inline (style=""), Internal (&lt;style&gt;), External (.css file)</p></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Q3d -->
+    <div class="q-card" id="q-p1-3d" onclick="toggle(this)">
+      <div class="q-header">
+        <div class="q-num">3d</div>
+        <div class="q-text">
+          <strong>Describe Presentation Software – Part 1.</strong>
+          <div class="q-meta"><span class="mark-tag">5 Marks</span></div>
+        </div>
+        <div class="chevron">▾</div>
+      </div>
+      <div class="q-answer">
+        <div class="ans-intro"><b>Presentation Software</b> is used to create visual slideshows for communicating information to an audience. Used in education, business, and training.</div>
+        <h3>Popular Software:</h3>
+        <div class="mini-grid">
+          <div class="mini-card"><h4>MS PowerPoint</h4><p>Most widely used. Rich features, offline use, .pptx format</p></div>
+          <div class="mini-card t"><h4>Google Slides</h4><p>Cloud-based, real-time collaboration, free</p></div>
+          <div class="mini-card p"><h4>LibreOffice Impress</h4><p>Free, open-source, compatible with .ppt</p></div>
+          <div class="mini-card o"><h4>Prezi</h4><p>Non-linear, zooming presentations, cloud-based</p></div>
+        </div>
+        <h3>Key Features:</h3>
+        <ul class="ans-list">
+          <li><span class="bullet">1</span><div><b>Slide creation</b> – Add, delete, duplicate, reorder slides</div></li>
+          <li><span class="bullet t">2</span><div><b>Text formatting</b> – Font, size, color, bold, alignment</div></li>
+          <li><span class="bullet p">3</span><div><b>Media insertion</b> – Images, videos, audio, charts, tables</div></li>
+          <li><span class="bullet o">4</span><div><b>Animations & Transitions</b> – Visual effects between slides and on objects</div></li>
+          <li><span class="bullet">5</span><div><b>Templates & Themes</b> – Pre-designed professional layouts</div></li>
+          <li><span class="bullet t">6</span><div><b>Speaker Notes</b> – Hidden notes visible only to presenter</div></li>
+          <li><span class="bullet p">7</span><div><b>Export</b> – Save as PDF, PPT, video, or image format</div></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Q4a -->
+    <div class="q-card" id="q-p1-4a" onclick="toggle(this)">
+      <div class="q-header">
+        <div class="q-num">4a</div>
+        <div class="q-text">
+          <strong>Explain Simulation and Virtual Reality applications.</strong>
+          <div class="q-meta"><span class="mark-tag">5 Marks</span></div>
+        </div>
+        <div class="chevron">▾</div>
+      </div>
+      <div class="q-answer">
+        <div class="ans-intro"><b>Simulation</b> imitates real-world processes using computer models. <b>Virtual Reality (VR)</b> creates fully immersive 3D digital environments the user can interact with.</div>
+        <h3>Simulation Applications:</h3>
+        <ul class="ans-list">
+          <li><span class="bullet">1</span><div>Flight simulation for pilot training</div></li>
+          <li><span class="bullet t">2</span><div>Medical simulation for surgical training</div></li>
+          <li><span class="bullet p">3</span><div>Military combat training simulations</div></li>
+          <li><span class="bullet o">4</span><div>Weather prediction models</div></li>
+        </ul>
+        <h3 class="t">VR Applications:</h3>
+        <ul class="ans-list">
+          <li><span class="bullet t">1</span><div><span class="li-title t">Gaming & Entertainment</span> – Immersive gaming experiences (Meta Quest, PlayStation VR)</div></li>
+          <li><span class="bullet t">2</span><div><span class="li-title t">Education</span> – Virtual classrooms, historical recreations, science experiments</div></li>
+          <li><span class="bullet t">3</span><div><span class="li-title t">Healthcare</span> – Phobia therapy, surgical training, pain management</div></li>
+          <li><span class="bullet t">4</span><div><span class="li-title t">Architecture</span> – Virtual walkthrough of buildings before construction</div></li>
+          <li><span class="bullet t">5</span><div><span class="li-title t">Tourism</span> – Virtual tours of monuments and places</div></li>
+          <li><span class="bullet t">6</span><div><span class="li-title t">Military Training</span> – Combat scenarios without real risk</div></li>
+        </ul>
+        <div class="tip-box">VR Hardware: Oculus Rift, HTC Vive, Meta Quest, PlayStation VR</div>
+      </div>
+    </div>
+
+    <!-- Q4b -->
+    <div class="q-card" id="q-p1-4b" onclick="toggle(this)">
+      <div class="q-header">
+        <div class="q-num">4b</div>
+        <div class="q-text">
+          <strong>Describe creating and uploading a new course (Moodle).</strong>
+          <div class="q-meta"><span class="mark-tag">5 Marks</span></div>
+        </div>
+        <div class="chevron">▾</div>
+      </div>
+      <div class="q-answer">
+        <div class="ans-intro"><b>Moodle</b> (Modular Object-Oriented Dynamic Learning Environment) is a free open-source LMS (Learning Management System) for creating online courses.</div>
+        <h3>Steps to Create & Upload a New Course:</h3>
+        <div class="step-list">
+          <div class="step"><div class="step-num">1</div><div>Login as Administrator or Teacher</div></div>
+          <div class="step"><div class="step-num">2</div><div>Go to <b>Site Administration → Courses → Add a new course</b></div></div>
+          <div class="step"><div class="step-num">3</div><div>Fill course details: Full name, Short name, Course ID number</div></div>
+          <div class="step"><div class="step-num">4</div><div>Set course category (e.g., Science, Commerce, Technology)</div></div>
+          <div class="step"><div class="step-num">5</div><div>Set start date and end date</div></div>
+          <div class="step"><div class="step-num">6</div><div>Choose course format: Weekly, Topics, Social</div></div>
+          <div class="step"><div class="step-num">7</div><div>Configure enrollment settings (self-enrollment or manual)</div></div>
+          <div class="step"><div class="step-num">8</div><div>Save and go to course editing mode</div></div>
+          <div class="step"><div class="step-num">9</div><div>Upload resources: PDFs, videos, PPTs using "Add activity or resource"</div></div>
+          <div class="step"><div class="step-num">10</div><div>Add activities: Assignments, Quizzes, Discussion Forums</div></div>
+          <div class="step"><div class="step-num">11</div><div>Enroll students → Course is ready!</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Q4c -->
+    <div class="q-card" id="q-p1-4c" onclick="toggle(this)">
+      <div class="q-header">
+        <div class="q-num">4c</div>
+        <div class="q-text">
+          <strong>Explain the Creation of 2D Animation.</strong>
+          <div class="q-meta"><span class="mark-tag">5 Marks</span></div>
+        </div>
+        <div class="chevron">▾</div>
+      </div>
+      <div class="q-answer">
+        <div class="ans-intro"><b>2D Animation</b> creates the illusion of movement in a two-dimensional plane. Objects only have width and height (no depth), making it simpler than 3D.</div>
+        <div class="mini-grid">
+          <div class="mini-card"><h4>Types</h4><p>Traditional (frame-by-frame), Cutout animation, Motion graphics, Tweening</p></div>
+          <div class="mini-card t"><h4>Tools</h4><p>Adobe Animate, Toon Boom Harmony, After Effects, Pencil2D (free)</p></div>
+        </div>
+        <h3>Creation Process:</h3>
+        <div class="step-list">
+          <div class="step"><div class="step-num">1</div><div><b>Concept & Script</b> – Define story, characters, and message</div></div>
+          <div class="step"><div class="step-num">2</div><div><b>Storyboard</b> – Sketch each scene sequentially before animating</div></div>
+          <div class="step"><div class="step-num">3</div><div><b>Character Design</b> – Draw characters, backgrounds, props</div></div>
+          <div class="step"><div class="step-num">4</div><div><b>Keyframing</b> – Set important poses at key moments (start, end positions)</div></div>
+          <div class="step"><div class="step-num">5</div><div><b>In-betweening (Tweening)</b> – Software fills in frames between keyframes for smooth motion</div></div>
+          <div class="step"><div class="step-num">6</div><div><b>Adding Backgrounds</b> – Layer backgrounds behind characters</div></div>
+          <div class="step"><div class="step-num">7</div><div><b>Sound Sync</b> – Add voice-over, music, and sound effects</div></div>
+          <div class="step"><div class="step-num">8</div><div><b>Export</b> – Render as GIF, MP4, or AVI format</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Q4d -->
+    <div class="q-card" id="q-p1-4d" onclick="toggle(this)">
+      <div class="q-header">
+        <div class="q-num">4d</div>
+        <div class="q-text">
+          <strong>Discuss about E-Publication concepts.</strong>
+          <div class="q-meta"><span class="mark-tag">5 Marks</span></div>
+        </div>
+        <div class="chevron">▾</div>
+      </div>
+      <div class="q-answer">
+        <div class="ans-intro"><b>E-Publication (Electronic Publication)</b> is any content published and distributed in digital format. It can be read on computers, tablets, e-readers, and smartphones.</div>
+        <h3>Types of E-Publications:</h3>
+        <ul class="ans-list">
+          <li><span class="bullet">1</span><div>E-Books – Digital books (novels, textbooks)</div></li>
+          <li><span class="bullet t">2</span><div>Digital Magazines – Interactive versions of print magazines</div></li>
+          <li><span class="bullet p">3</span><div>Online Newspapers – News accessible on websites</div></li>
+          <li><span class="bullet o">4</span><div>Academic Journals – Research papers published digitally</div></li>
+        </ul>
+        <h3>Common Formats:</h3>
+        <div class="mini-grid">
+          <div class="mini-card"><h4>PDF</h4><p>Fixed layout, universal, printable</p></div>
+          <div class="mini-card t"><h4>EPUB</h4><p>Reflowable, resizable text, e-reader friendly</p></div>
+          <div class="mini-card p"><h4>MOBI</h4><p>Kindle format by Amazon</p></div>
+          <div class="mini-card o"><h4>HTML</h4><p>Web-based, interactive, hyperlinks</p></div>
+        </div>
+        <h3>Key Concepts:</h3>
+        <ul class="ans-list">
+          <li><span class="bullet t">•</span><div><b>Metadata</b> – Title, author, ISBN, keywords for discoverability</div></li>
+          <li><span class="bullet t">•</span><div><b>DRM</b> (Digital Rights Management) – Protects copyright of digital content</div></li>
+          <li><span class="bullet t">•</span><div><b>Platforms</b> – Amazon Kindle, Google Play Books, Apple Books</div></li>
+          <li><span class="bullet t">•</span><div><b>Advantages</b> – Cost-effective, searchable, portable, environmentally friendly</div></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Q5a -->
+    <div class="q-card" id="q-p1-5a" onclick="toggle(this)">
+      <div class="q-header">
+        <div class="q-num">5a</div>
+        <div class="q-text">
+          <strong>Explain Add & Enroll user discussion form (Moodle).</strong>
+          <div class="q-meta"><span class="mark-tag">5 Marks</span></div>
+        </div>
+        <div class="chevron">▾</div>
+      </div>
+      <div class="q-answer">
+        <div class="ans-intro">In Moodle, a <b>Discussion Forum</b> allows students and teachers to communicate asynchronously. Users must be enrolled in the course to participate.</div>
+        <h3>Adding a Discussion Forum:</h3>
+        <div class="step-list">
+          <div class="step"><div class="step-num">1</div><div>Go to the course → Click "Turn Editing On"</div></div>
+          <div class="step"><div class="step-num">2</div><div>Click "Add an activity or resource" in desired section</div></div>
+          <div class="step"><div class="step-num">3</div><div>Select <b>Forum</b> from the list</div></div>
+          <div class="step"><div class="step-num">4</div><div>Set Forum Name, Description, and Forum Type</div></div>
+          <div class="step"><div class="step-num">5</div><div>Configure settings: subscription, post limits, grading</div></div>
+          <div class="step"><div class="step-num">6</div><div>Save and return to course</div></div>
+        </div>
+        <h3 class="t">Enrolling Users:</h3>
+        <div class="step-list">
+          <div class="step"><div class="step-num t">1</div><div>Go to course → Administration → <b>Enrolled users</b></div></div>
+          <div class="step"><div class="step-num t">2</div><div>Click "Enroll Users" button</div></div>
+          <div class="step"><div class="step-num t">3</div><div>Search for user by name or email</div></div>
+          <div class="step"><div class="step-num t">4</div><div>Assign role: Student, Teacher, Non-editing teacher</div></div>
+          <div class="step"><div class="step-num t">5</div><div>Click "Enroll selected users and cohorts"</div></div>
+        </div>
+        <div class="ans-intro teal">Forum Types: Standard Forum, Single Simple Discussion, Q&A Forum, Each Person Posts One Discussion</div>
+      </div>
+    </div>
+
+    <!-- Q5b -->
+    <div class="q-card" id="q-p1-5b" onclick="toggle(this)">
+      <div class="q-header">
+        <div class="q-num">5b</div>
+        <div class="q-text">
+          <strong>Explain about CMS with example of Joomla.</strong>
+          <div class="q-meta"><span class="mark-tag">5 Marks</span></div>
+        </div>
+        <div class="chevron">▾</div>
+      </div>
+      <div class="q-answer">
+        <div class="ans-intro"><b>Joomla</b> is a free, open-source Content Management System built with PHP and MySQL. It is the second most popular CMS after WordPress, used by millions of websites worldwide.</div>
+        <h3>Key Features of Joomla:</h3>
+        <ul class="ans-list">
+          <li><span class="bullet">1</span><div><span class="li-title">Article Management</span> – Create, edit, publish articles with categories and tags</div></li>
+          <li><span class="bullet t">2</span><div><span class="li-title t">Extension System</span> – Thousands of plugins, components, modules for added functionality</div></li>
+          <li><span class="bullet p">3</span><div><span class="li-title p">Template System</span> – Change look and feel using themes</div></li>
+          <li><span class="bullet o">4</span><div><span class="li-title o">Multi-language</span> – Built-in language manager for multilingual sites</div></li>
+          <li><span class="bullet">5</span><div><span class="li-title">User Management</span> – Advanced access levels: Public, Registered, Author, Editor, Publisher, Admin</div></li>
+          <li><span class="bullet t">6</span><div><span class="li-title t">SEO Tools</span> – URL rewriting, meta tags, sitemaps</div></li>
+          <li><span class="bullet p">7</span><div><span class="li-title p">Media Manager</span> – Upload and manage images, documents, files</div></li>
+        </ul>
+        <div class="mini-grid">
+          <div class="mini-card"><h4>Structure</h4><p>Articles → Categories → Menus → Modules → Templates</p></div>
+          <div class="mini-card t"><h4>Used For</h4><p>E-commerce, government sites, social networks, portals</p></div>
+        </div>
+        <div class="tip-box">Joomla admin URL: yourdomain.com/administrator | More complex than WordPress but more flexible</div>
+      </div>
+    </div>
+
+    <!-- Q5c -->
+    <div class="q-card" id="q-p1-5c" onclick="toggle(this)">
+      <div class="q-header">
+        <div class="q-num">5c</div>
+        <div class="q-text">
+          <strong>Explain create & add assessment in CMS (Moodle).</strong>
+          <div class="q-meta"><span class="mark-tag">5 Marks</span></div>
+        </div>
+        <div class="chevron">▾</div>
+      </div>
+      <div class="q-answer">
+        <div class="ans-intro">In Moodle, <b>Assessments</b> include Quizzes, Assignments, and Surveys to evaluate student learning.</div>
+        <h3>Steps to Create a Quiz Assessment:</h3>
+        <div class="step-list">
+          <div class="step"><div class="step-num">1</div><div>Go to course → Turn editing on</div></div>
+          <div class="step"><div class="step-num">2</div><div>Click "Add an activity" → Select <b>Quiz</b></div></div>
+          <div class="step"><div class="step-num">3</div><div>Set quiz name, description, and time limit</div></div>
+          <div class="step"><div class="step-num">4</div><div>Set open date and close date for the quiz</div></div>
+          <div class="step"><div class="step-num">5</div><div>Configure grade settings and passing marks</div></div>
+          <div class="step"><div class="step-num">6</div><div>Save → then click "Edit quiz" to add questions</div></div>
+          <div class="step"><div class="step-num">7</div><div>Add questions from Question Bank or create new ones</div></div>
+        </div>
+        <h3 class="t">Question Types Available:</h3>
+        <div style="display:flex;flex-wrap:wrap;gap:6px;margin:8px 0">
+          <span class="key-point">Multiple Choice</span>
+          <span class="key-point t">True/False</span>
+          <span class="key-point">Short Answer</span>
+          <span class="key-point t">Essay</span>
+          <span class="key-point">Matching</span>
+          <span class="key-point t">Numerical</span>
+        </div>
+        <h3>Steps for Assignment Assessment:</h3>
+        <ul class="ans-list">
+          <li><span class="bullet p">•</span><div>Add Activity → Assignment → Set name, description, due date</div></li>
+          <li><span class="bullet p">•</span><div>Choose submission type: Online text, File submission</div></li>
+          <li><span class="bullet p">•</span><div>Students submit → Teacher grades in Gradebook</div></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Q5d -->
+    <div class="q-card" id="q-p1-5d" onclick="toggle(this)">
+      <div class="q-header">
+        <div class="q-num">5d</div>
+        <div class="q-text">
+          <strong>Explain about CMS with example of Drupal.</strong>
+          <div class="q-meta"><span class="mark-tag">5 Marks</span></div>
+        </div>
+        <div class="chevron">▾</div>
+      </div>
+      <div class="q-answer">
+        <div class="ans-intro"><b>Drupal</b> is a powerful, flexible open-source CMS built with PHP. It is the third most popular CMS, preferred by governments, universities, and large enterprises for its security and scalability.</div>
+        <h3>Key Features of Drupal:</h3>
+        <ul class="ans-list">
+          <li><span class="bullet">1</span><div><span class="li-title">Node-based Content</span> – Everything is a "node" (article, page, blog post, product)</div></li>
+          <li><span class="bullet t">2</span><div><span class="li-title t">Taxonomy System</span> – Advanced content categorization with tags and vocabularies</div></li>
+          <li><span class="bullet p">3</span><div><span class="li-title p">Powerful Permissions</span> – Granular user roles and access control</div></li>
+          <li><span class="bullet o">4</span><div><span class="li-title o">Views Module</span> – Create custom content displays without coding</div></li>
+          <li><span class="bullet">5</span><div><span class="li-title">REST API</span> – Headless CMS capabilities for decoupled architecture</div></li>
+          <li><span class="bullet t">6</span><div><span class="li-title t">High Security</span> – Used by US government (whitehouse.gov), NASA</div></li>
+          <li><span class="bullet p">7</span><div><span class="li-title p">Multilingual</span> – Built-in support for 100+ languages</div></li>
+        </ul>
+        <table class="compare-table" style="margin-top:10px">
+          <tr><th>Feature</th><th>Drupal</th><th>WordPress</th></tr>
+          <tr><td>Ease of Use</td><td>Complex (for developers)</td><td>Easy (for everyone)</td></tr>
+          <tr><td>Security</td><td>Very High</td><td>Moderate</td></tr>
+          <tr><td>Flexibility</td><td>Very High</td><td>High</td></tr>
+          <tr><td>Best For</td><td>Enterprise, Government</td><td>Blogs, SMBs</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- PART B -->
+    <div class="section-header">
+      <h2>Part – B</h2>
+      <span class="section-pill part-b">5 × 2 = 10 Marks (any 5)</span>
+    </div>
+
+    <div class="q-card" id="q-p1-6" onclick="toggle(this)">
+      <div class="q-header">
+        <div class="q-num short-num">6</div>
+        <div class="q-text">
+          <strong>What is a dynamic website?</strong>
+          <div class="q-meta"><span class="mark-tag">2 Marks</span></div>
+        </div>
+        <div class="chevron">▾</div>
+      </div>
+      <div class="q-answer">
+        <div class="ans-intro">A <b>dynamic website</b> generates web pages in real-time based on user requests, database queries, and server-side processing. Content changes for different users, times, or conditions.</div>
+        <ul class="ans-list">
+          <li><span class="bullet">•</span><div>Uses server-side scripting: PHP, Python, Node.js, ASP.NET</div></li>
+          <li><span class="bullet">•</span><div>Fetches data from database (MySQL, MongoDB)</div></li>
+          <li><span class="bullet">•</span><div>Examples: Facebook, Amazon, YouTube, Gmail</div></li>
+          <li><span class="bullet">•</span><div>Personalized content for each user</div></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="q-card" id="q-p1-7" onclick="toggle(this)">
+      <div class="q-header">
+        <div class="q-num short-num">7</div>
+        <div class="q-text">
+          <strong>What are norms? List the characteristics.</strong>
+          <div class="q-meta"><span class="mark-tag">2 Marks</span></div>
+        </div>
+        <div class="chevron">▾</div>
+      </div>
+      <div class="q-answer">
+        <div class="ans-intro"><b>Norms</b> in CMS are established standards, rules, and guidelines followed for creating and managing content consistently and effectively.</div>
+        <h3>Characteristics:</h3>
+        <div style="display:flex;flex-wrap:wrap;gap:6px;margin:8px 0">
+          <span class="key-point">Consistency</span>
+          <span class="key-point t">Clarity</span>
+          <span class="key-point p">Accuracy</span>
+          <span class="key-point">Completeness</span>
+          <span class="key-point t">Timeliness</span>
+          <span class="key-point p">Accessibility</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="q-card" id="q-p1-8" onclick="toggle(this)">
+      <div class="q-header">
+        <div class="q-num short-num">8</div>
+        <div class="q-text">
+          <strong>Write a note on media format in CMS.</strong>
+          <div class="q-meta"><span class="mark-tag">2 Marks</span></div>
+        </div>
+        <div class="chevron">▾</div>
+      </div>
+      <div class="q-answer">
+        <div class="ans-intro">CMS supports various <b>media formats</b> stored in the media library for use in web content.</div>
+        <div class="mini-grid">
+          <div class="mini-card"><h4>🖼 Images</h4><p>JPEG, PNG, GIF, WebP, SVG</p></div>
+          <div class="mini-card t"><h4>🎵 Audio</h4><p>MP3, WAV, OGG, AAC</p></div>
+          <div class="mini-card p"><h4>🎬 Video</h4><p>MP4, AVI, MOV, WebM</p></div>
+          <div class="mini-card o"><h4>📄 Documents</h4><p>PDF, DOC, DOCX, XLSX</p></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="q-card" id="q-p1-9" onclick="toggle(this)">
+      <div class="q-header">
+        <div class="q-num short-num">9</div>
+        <div class="q-text">
+          <strong>Define Collaboration.</strong>
+          <div class="q-meta"><span class="mark-tag">2 Marks</span></div>
+        </div>
+        <div class="chevron">▾</div>
+      </div>
+      <div class="q-answer">
+        <div class="ans-intro"><b>Collaboration</b> in CMS is the process where multiple users work together to create, edit, review, and manage digital content simultaneously.</div>
+        <ul class="ans-list">
+          <li><span class="bullet">•</span><div>Features: shared access, version control, comments, workflow</div></li>
+          <li><span class="bullet">•</span><div>User roles define who can view, edit, approve, or publish</div></li>
+          <li><span class="bullet">•</span><div>Examples: Google Docs, WordPress multi-author, SharePoint</div></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="q-card" id="q-p1-10" onclick="toggle(this)">
+      <div class="q-header">
+        <div class="q-num short-num">10</div>
+        <div class="q-text">
+          <strong>Write a note on any two screen casting tools.</strong>
+          <div class="q-meta"><span class="mark-tag">2 Marks</span></div>
+        </div>
+        <div class="chevron">▾</div>
+      </div>
+      <div class="q-answer">
+        <div class="mini-grid">
+          <div class="mini-card">
+            <h4>1. OBS Studio</h4>
+            <p>Free, open-source. Supports full-screen and window recording. Used for tutorials and live streaming. High quality output. Slight learning curve.</p>
+          </div>
+          <div class="mini-card t">
+            <h4>2. Camtasia</h4>
+            <p>Paid software. User-friendly interface. Built-in video editor. Supports annotations, zoom, callouts. Best for professional educational content.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="q-card" id="q-p1-11" onclick="toggle(this)">
+      <div class="q-header">
+        <div class="q-num short-num">11</div>
+        <div class="q-text">
+          <strong>Define 3D Animation.</strong>
+          <div class="q-meta"><span class="mark-tag">2 Marks</span></div>
+        </div>
+        <div class="chevron">▾</div>
+      </div>
+      <div class="q-answer">
+        <div class="ans-intro"><b>3D Animation</b> is the process of creating moving images in a three-dimensional digital environment. Objects have width, height, and <i>depth</i>, making them appear realistic.</div>
+        <ul class="ans-list">
+          <li><span class="bullet">•</span><div>Tools: Blender (free), Maya, 3ds Max, Cinema 4D</div></li>
+          <li><span class="bullet">•</span><div>Process: Modeling → Rigging → Texturing → Lighting → Rendering</div></li>
+          <li><span class="bullet">•</span><div>Used in: Movies, Video games, Architecture, Medical visualization</div></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="q-card" id="q-p1-12" onclick="toggle(this)">
+      <div class="q-header">
+        <div class="q-num short-num">12</div>
+        <div class="q-text">
+          <strong>What is flexibility in WCMS?</strong>
+          <div class="q-meta"><span class="mark-tag">2 Marks</span></div>
+        </div>
+        <div class="chevron">▾</div>
+      </div>
+      <div class="q-answer">
+        <div class="ans-intro"><b>Flexibility in WCMS</b> refers to the system's ability to adapt, customize, and scale according to different business needs and technical requirements.</div>
+        <div style="display:flex;flex-wrap:wrap;gap:6px;margin:8px 0">
+          <span class="key-point">Custom Templates</span>
+          <span class="key-point t">Plugin/Extension Support</span>
+          <span class="key-point p">Multiple Content Types</span>
+          <span class="key-point">API Integration</span>
+          <span class="key-point t">Multi-site Management</span>
+          <span class="key-point p">Scalability</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="q-card" id="q-p1-13" onclick="toggle(this)">
+      <div class="q-header">
+        <div class="q-num short-num">13</div>
+        <div class="q-text">
+          <strong>What is e-publication?</strong>
+          <div class="q-meta"><span class="mark-tag">2 Marks</span></div>
+        </div>
+        <div class="chevron">▾</div>
+      </div>
+      <div class="q-answer">
+        <div class="ans-intro"><b>E-publication</b> is any content (books, magazines, journals, newspapers) that is published and distributed in digital electronic format, accessible on devices like computers, tablets, e-readers, and smartphones.</div>
+        <ul class="ans-list">
+          <li><span class="bullet">•</span><div>Formats: PDF, EPUB, MOBI, HTML, AZW3</div></li>
+          <li><span class="bullet">•</span><div>Platforms: Amazon Kindle, Apple Books, Google Play Books</div></li>
+          <li><span class="bullet">•</span><div>Advantages: Portable, searchable, cost-effective, eco-friendly</div></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ PAPER 2 ============================================================ -->
+<div id="p2" class="paper-content">
+  <button class="expand-btn" onclick="expandAll('p2')">⬇ Expand All Answers</button>
+  <div id="no-results-p2" class="no-results">No questions found. Try a different search term.</div>
+
+  <div class="section-header">
+    <h2>Part – A</h2>
+    <span class="section-pill">5 × 10 = 50 Marks</span>
+  </div>
+
+  <!-- Q1a -->
+  <div class="q-card" id="q-p2-1a" onclick="toggle(this)">
+    <div class="q-header">
+      <div class="q-num">1a</div>
+      <div class="q-text">
+        <strong>Describe the concept of CMS and its role in website development.</strong>
+        <div class="q-meta"><span class="mark-tag">4 Marks</span></div>
+      </div>
+      <div class="chevron">▾</div>
+    </div>
+    <div class="q-answer">
+      <div class="ans-intro">A <b>Content Management System (CMS)</b> is software that allows users to create, manage, and modify digital content on a website without requiring technical coding knowledge. It separates content from design.</div>
+      <h3>Core Components of CMS:</h3>
+      <ul class="ans-list">
+        <li><span class="bullet">1</span><div><b>CMA</b> (Content Management Application) – Interface for creating and editing content</div></li>
+        <li><span class="bullet t">2</span><div><b>CDA</b> (Content Delivery Application) – Delivers content to website visitors</div></li>
+      </ul>
+      <h3 class="t">Role in Website Development:</h3>
+      <ul class="ans-list">
+        <li><span class="bullet t">•</span><div>Allows non-technical users to update website content easily</div></li>
+        <li><span class="bullet t">•</span><div>Provides templates/themes for consistent design</div></li>
+        <li><span class="bullet t">•</span><div>Manages user roles: Admin, Editor, Author, Subscriber</div></li>
+        <li><span class="bullet t">•</span><div>Handles content workflow: draft → review → publish</div></li>
+        <li><span class="bullet t">•</span><div>Stores content in a database (MySQL)</div></li>
+        <li><span class="bullet t">•</span><div>Built-in SEO tools, media management, and plugin support</div></li>
+      </ul>
+      <div class="tip-box">Popular CMS: WordPress (43% of all websites), Joomla, Drupal, Wix, Squarespace</div>
+    </div>
+  </div>
+
+  <!-- Q1b -->
+  <div class="q-card" id="q-p2-1b" onclick="toggle(this)">
+    <div class="q-header">
+      <div class="q-num">1b</div>
+      <div class="q-text">
+        <strong>Explain multimedia content and list three types used in digital media.</strong>
+        <div class="q-meta"><span class="mark-tag">6 Marks</span></div>
+      </div>
+      <div class="chevron">▾</div>
+    </div>
+    <div class="q-answer">
+      <div class="ans-intro"><b>Multimedia content</b> is a combination of multiple forms of media — text, audio, video, images, and animation — integrated to communicate information effectively.</div>
+      <h3>Three Main Types:</h3>
+      <ul class="ans-list">
+        <li><span class="bullet">1</span><div>
+          <span class="li-title">Audio Content</span><br>
+          Sound-based content. Includes music, podcasts, voice-overs, sound effects.<br>
+          Formats: MP3, WAV, OGG<br>
+          Uses: Podcasts, radio, online courses, background music
+        </div></li>
+        <li><span class="bullet t">2</span><div>
+          <span class="li-title t">Video Content</span><br>
+          Moving visual content with or without audio. Most engaging type of content.<br>
+          Formats: MP4, AVI, MOV, WebM<br>
+          Uses: YouTube videos, movie streaming, tutorials, advertisements
+        </div></li>
+        <li><span class="bullet p">3</span><div>
+          <span class="li-title p">Animation</span><br>
+          Sequence of images/frames creating illusion of motion. Can be 2D or 3D.<br>
+          Formats: GIF, MP4 (exported animation)<br>
+          Uses: Explainer videos, cartoons, web banners, games
+        </div></li>
+      </ul>
+      <div class="tip-box">Other types: Images, Interactive content (forms, quizzes), Infographics</div>
+    </div>
+  </div>
+
+  <!-- Q1c -->
+  <div class="q-card" id="q-p2-1c" onclick="toggle(this)">
+    <div class="q-header">
+      <div class="q-num">1c</div>
+      <div class="q-text">
+        <strong>Define interactive content and how it is used for engaging website visitors.</strong>
+        <div class="q-meta"><span class="mark-tag">4 Marks</span></div>
+      </div>
+      <div class="chevron">▾</div>
+    </div>
+    <div class="q-answer">
+      <div class="ans-intro"><b>Interactive content</b> is content that requires active user participation and dynamically responds to user actions, creating a two-way experience rather than passive consumption.</div>
+      <h3>Types & Examples:</h3>
+      <ul class="ans-list">
+        <li><span class="bullet">1</span><div><span class="li-title">Quizzes & Polls</span> – Users answer questions, get personalized results. Increases time on site</div></li>
+        <li><span class="bullet t">2</span><div><span class="li-title t">Calculators</span> – Loan calculators, BMI calculators. Provide immediate value</div></li>
+        <li><span class="bullet p">3</span><div><span class="li-title p">Interactive Maps</span> – Users explore locations, filter data</div></li>
+        <li><span class="bullet o">4</span><div><span class="li-title o">Games & Simulations</span> – Gamified experiences that keep users engaged</div></li>
+        <li><span class="bullet">5</span><div><span class="li-title">Forms & Surveys</span> – Collect user data and opinions</div></li>
+      </ul>
+      <h3 class="t">Benefits for Engagement:</h3>
+      <ul class="ans-list">
+        <li><span class="bullet t">•</span><div>Increases time spent on website (reduced bounce rate)</div></li>
+        <li><span class="bullet t">•</span><div>Collects valuable user data and preferences</div></li>
+        <li><span class="bullet t">•</span><div>Creates personalized experience for each user</div></li>
+        <li><span class="bullet t">•</span><div>Higher social sharing potential</div></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Q1d same as 1a paper 1, just abbreviated -->
+  <div class="q-card" id="q-p2-1d" onclick="toggle(this)">
+    <div class="q-header">
+      <div class="q-num">1d</div>
+      <div class="q-text">
+        <strong>Discuss the different types of Content Management Systems.</strong>
+        <div class="q-meta"><span class="mark-tag">6 Marks</span></div>
+      </div>
+      <div class="chevron">▾</div>
+    </div>
+    <div class="q-answer">
+      <div class="ans-intro">Same as Q1a of Paper 1 – refer above for full answer.</div>
+      <ul class="ans-list">
+        <li><span class="bullet">1</span><div><span class="li-title">Web CMS (WCMS)</span> – WordPress, Joomla, Drupal. Manages website content</div></li>
+        <li><span class="bullet t">2</span><div><span class="li-title t">Enterprise CMS (ECMS)</span> – SharePoint. For large organizations</div></li>
+        <li><span class="bullet p">3</span><div><span class="li-title p">Document Management System (DMS)</span> – Manages documents and file storage</div></li>
+        <li><span class="bullet o">4</span><div><span class="li-title o">Digital Asset Management (DAM)</span> – Images, videos, brand assets</div></li>
+        <li><span class="bullet">5</span><div><span class="li-title">LMS (Learning Management System)</span> – Moodle. Online education platforms</div></li>
+        <li><span class="bullet t">6</span><div><span class="li-title t">Component CMS (CCMS)</span> – Content at component level for reuse</div></li>
+        <li><span class="bullet p">7</span><div><span class="li-title p">Mobile CMS</span> – Content delivery for mobile applications</div></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Q2a -->
+  <div class="q-card" id="q-p2-2a" onclick="toggle(this)">
+    <div class="q-header">
+      <div class="q-num">2a</div>
+      <div class="q-text">
+        <strong>Explain the difference between shared hosting, VPS hosting and dedicated hosting.</strong>
+        <div class="q-meta"><span class="mark-tag">6 Marks</span></div>
+      </div>
+      <div class="chevron">▾</div>
+    </div>
+    <div class="q-answer">
+      <table class="compare-table">
+        <tr><th>Feature</th><th>Shared Hosting</th><th>VPS Hosting</th><th>Dedicated Hosting</th></tr>
+        <tr><td>Definition</td><td>Multiple sites share one server</td><td>Virtual partition on server</td><td>Entire server for one site</td></tr>
+        <tr><td>Cost</td><td>Cheapest (₹100–500/mo)</td><td>Moderate (₹500–3000/mo)</td><td>Expensive (₹5000+/mo)</td></tr>
+        <tr><td>Performance</td><td>Low – affected by others</td><td>Medium – guaranteed resources</td><td>Highest performance</td></tr>
+        <tr><td>Control</td><td>Very Limited</td><td>Moderate</td><td>Full Control</td></tr>
+        <tr><td>Security</td><td>Low</td><td>Medium</td><td>High</td></tr>
+        <tr><td>Best For</td><td>Small blogs, beginners</td><td>Growing businesses</td><td>Large enterprises</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- Q2b -->
+  <div class="q-card" id="q-p2-2b" onclick="toggle(this)">
+    <div class="q-header">
+      <div class="q-num">2b</div>
+      <div class="q-text">
+        <strong>Discuss the factors one should consider when choosing a web hosting provider.</strong>
+        <div class="q-meta"><span class="mark-tag">4 Marks</span></div>
+      </div>
+      <div class="chevron">▾</div>
+    </div>
+    <div class="q-answer">
+      <ul class="ans-list">
+        <li><span class="bullet">1</span><div><span class="li-title">Uptime Guarantee</span> – Should be 99.9% or higher. Downtime means lost visitors</div></li>
+        <li><span class="bullet t">2</span><div><span class="li-title t">Speed & Performance</span> – Fast servers with SSD storage and CDN support</div></li>
+        <li><span class="bullet p">3</span><div><span class="li-title p">Storage & Bandwidth</span> – Adequate disk space and data transfer limits</div></li>
+        <li><span class="bullet o">4</span><div><span class="li-title o">Security Features</span> – SSL certificate, firewall, malware scanning, DDoS protection</div></li>
+        <li><span class="bullet">5</span><div><span class="li-title">Customer Support</span> – 24/7 support via chat, email, or phone</div></li>
+        <li><span class="bullet t">6</span><div><span class="li-title t">Scalability</span> – Easy upgrade options as website grows</div></li>
+        <li><span class="bullet p">7</span><div><span class="li-title p">Price & Value</span> – Compare plans, renewal prices, and included features</div></li>
+        <li><span class="bullet o">8</span><div><span class="li-title o">Backup Facilities</span> – Automatic daily/weekly backups</div></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Q2c -->
+  <div class="q-card" id="q-p2-2c" onclick="toggle(this)">
+    <div class="q-header">
+      <div class="q-num">2c</div>
+      <div class="q-text">
+        <strong>Advantages and disadvantages of self-hosting vs using a hosting provider.</strong>
+        <div class="q-meta"><span class="mark-tag">5 Marks</span></div>
+      </div>
+      <div class="chevron">▾</div>
+    </div>
+    <div class="q-answer">
+      <table class="compare-table">
+        <tr><th></th><th>Self-Hosting</th><th>Hosting Provider</th></tr>
+        <tr><td><b>Advantages</b></td><td>Full control, No monthly fees, Maximum customization, Data privacy</td><td>Managed infrastructure, Technical support, Reliable uptime, Easy setup</td></tr>
+        <tr><td><b>Disadvantages</b></td><td>Requires technical expertise, High setup cost (hardware), Maintenance burden, Power/internet dependency</td><td>Monthly/yearly costs, Less control, Shared resources (shared hosting), Provider terms apply</td></tr>
+        <tr><td><b>Best For</b></td><td>Large enterprises with IT team</td><td>Businesses and individuals</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- Q2d -->
+  <div class="q-card" id="q-p2-2d" onclick="toggle(this)">
+    <div class="q-header">
+      <div class="q-num">2d</div>
+      <div class="q-text">
+        <strong>Explain the role of domain names in the context of web hosting.</strong>
+        <div class="q-meta"><span class="mark-tag">5 Marks</span></div>
+      </div>
+      <div class="chevron">▾</div>
+    </div>
+    <div class="q-answer">
+      <div class="ans-intro">A <b>domain name</b> is a human-readable address used to access a website (e.g., www.google.com) instead of its numeric IP address (142.250.195.78).</div>
+      <ul class="ans-list">
+        <li><span class="bullet">1</span><div><span class="li-title">DNS Resolution</span> – Domain Name System converts domain name to IP address of hosting server</div></li>
+        <li><span class="bullet t">2</span><div><span class="li-title t">Domain Registration</span> – Registered through registrars: GoDaddy, Namecheap, Google Domains</div></li>
+        <li><span class="bullet p">3</span><div><span class="li-title p">Domain Types</span> – TLD: .com, .org, .net | Country: .in, .uk, .au | New: .tech, .store, .io</div></li>
+        <li><span class="bullet o">4</span><div><span class="li-title o">A Record</span> – DNS A record points domain name to hosting server's IP address</div></li>
+        <li><span class="bullet">5</span><div><span class="li-title">SSL Certificate</span> – HTTPS security certificate is linked to the domain name</div></li>
+        <li><span class="bullet t">6</span><div><span class="li-title t">Subdomains</span> – blog.example.com, shop.example.com can point to different hosting</div></li>
+        <li><span class="bullet p">7</span><div><span class="li-title p">Branding</span> – Domain name represents brand identity and builds trust</div></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Q3a -->
+  <div class="q-card" id="q-p2-3a" onclick="toggle(this)">
+    <div class="q-header">
+      <div class="q-num">3a</div>
+      <div class="q-text">
+        <strong>Discuss the challenges associated with managing large volume of multimedia content.</strong>
+        <div class="q-meta"><span class="mark-tag">4 Marks</span></div>
+      </div>
+      <div class="chevron">▾</div>
+    </div>
+    <div class="q-answer">
+      <ul class="ans-list">
+        <li><span class="bullet">1</span><div><span class="li-title">Storage Space</span> – Video/audio files are large; need expensive storage infrastructure</div></li>
+        <li><span class="bullet t">2</span><div><span class="li-title t">Performance Issues</span> – Large files cause slow page loading, poor user experience</div></li>
+        <li><span class="bullet p">3</span><div><span class="li-title p">Organization & Retrieval</span> – Finding specific files among thousands becomes difficult</div></li>
+        <li><span class="bullet o">4</span><div><span class="li-title o">Version Control</span> – Tracking multiple versions of updated media files</div></li>
+        <li><span class="bullet">5</span><div><span class="li-title">Format Compatibility</span> – Different devices support different formats; need conversion</div></li>
+        <li><span class="bullet t">6</span><div><span class="li-title t">Bandwidth Costs</span> – Serving large media files to many users is expensive</div></li>
+        <li><span class="bullet p">7</span><div><span class="li-title p">Copyright & Rights Management</span> – Ensuring proper licensing for all media</div></li>
+        <li><span class="bullet o">8</span><div><span class="li-title o">Backup & Recovery</span> – Regular backup of large media libraries is time-consuming</div></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Q3b -->
+  <div class="q-card" id="q-p2-3b" onclick="toggle(this)">
+    <div class="q-header">
+      <div class="q-num">3b</div>
+      <div class="q-text">
+        <strong>Discuss the key features commonly found in presentation software.</strong>
+        <div class="q-meta"><span class="mark-tag">6 Marks</span></div>
+      </div>
+      <div class="chevron">▾</div>
+    </div>
+    <div class="q-answer">
+      <ul class="ans-list">
+        <li><span class="bullet">1</span><div><span class="li-title">Slide Management</span> – Create, delete, duplicate, reorder, and group slides</div></li>
+        <li><span class="bullet t">2</span><div><span class="li-title t">Text Formatting</span> – Font family, size, color, bold, italic, alignment, bullet points</div></li>
+        <li><span class="bullet p">3</span><div><span class="li-title p">Media Insertion</span> – Add images, videos, audio clips, charts, tables, SmartArt</div></li>
+        <li><span class="bullet o">4</span><div><span class="li-title o">Animations</span> – Apply entrance, exit, emphasis effects to individual objects</div></li>
+        <li><span class="bullet">5</span><div><span class="li-title">Slide Transitions</span> – Visual effects when moving from one slide to next</div></li>
+        <li><span class="bullet t">6</span><div><span class="li-title t">Templates & Themes</span> – Pre-designed professional layouts with consistent colors and fonts</div></li>
+        <li><span class="bullet p">7</span><div><span class="li-title p">Speaker Notes</span> – Additional notes visible only to presenter during slideshow</div></li>
+        <li><span class="bullet o">8</span><div><span class="li-title o">Collaboration</span> – Multiple users can edit simultaneously (Google Slides)</div></li>
+        <li><span class="bullet">9</span><div><span class="li-title">Export Options</span> – Save as PDF, PPT, PPTX, MP4 video, or image format</div></li>
+        <li><span class="bullet t">10</span><div><span class="li-title t">Spell Check</span> – Automatic grammar and spelling correction</div></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Q3c -->
+  <div class="q-card" id="q-p2-3c" onclick="toggle(this)">
+    <div class="q-header">
+      <div class="q-num">3c</div>
+      <div class="q-text">
+        <strong>Explore advanced features in presentation software (PowerPoint / Google Slides).</strong>
+        <div class="q-meta"><span class="mark-tag">5 Marks</span></div>
+      </div>
+      <div class="chevron">▾</div>
+    </div>
+    <div class="q-answer">
+      <div class="mini-grid">
+        <div class="mini-card">
+          <h4>MS PowerPoint – Advanced</h4>
+          <p>✦ Morph Transition (smooth animation)<br>✦ 3D Models integration<br>✦ PowerPoint Designer (AI suggestions)<br>✦ Live captions/subtitles<br>✦ Presenter Coach (rehearsal AI)<br>✦ Co-authoring in real-time</p>
+        </div>
+        <div class="mini-card t">
+          <h4>Google Slides – Advanced</h4>
+          <p>✦ Real-time multi-user collaboration<br>✦ Auto-save to Google Drive (cloud)<br>✦ Q&A feature during live presentation<br>✦ Live link to Google Sheets data<br>✦ Full version history<br>✦ Offline editing support</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q3d -->
+  <div class="q-card" id="q-p2-3d" onclick="toggle(this)">
+    <div class="q-header">
+      <div class="q-num">3d</div>
+      <div class="q-text">
+        <strong>Explain dynamic web content. How does it differ from static content?</strong>
+        <div class="q-meta"><span class="mark-tag">5 Marks</span></div>
+      </div>
+      <div class="chevron">▾</div>
+    </div>
+    <div class="q-answer">
+      <table class="compare-table">
+        <tr><th>Feature</th><th>Static Content</th><th>Dynamic Content</th></tr>
+        <tr><td>Definition</td><td>Fixed HTML files, same for all users</td><td>Generated on-demand from database</td></tr>
+        <tr><td>Technology</td><td>HTML, CSS only</td><td>PHP, Python, Node.js + Database</td></tr>
+        <tr><td>Content Changes</td><td>Only when file is edited manually</td><td>Automatically based on user/data</td></tr>
+        <tr><td>Speed</td><td>Faster (pre-built pages)</td><td>Slightly slower (server processing)</td></tr>
+        <tr><td>Personalization</td><td>Same for everyone</td><td>Personalized per user</td></tr>
+        <tr><td>Maintenance</td><td>Difficult to update many pages</td><td>Easy – update database once</td></tr>
+        <tr><td>Examples</td><td>Company info page, resume site</td><td>Facebook, Amazon, Gmail, YouTube</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- Q4a -->
+  <div class="q-card" id="q-p2-4a" onclick="toggle(this)">
+    <div class="q-header">
+      <div class="q-num">4a</div>
+      <div class="q-text">
+        <strong>Why is multilingual content development important in the digital age?</strong>
+        <div class="q-meta"><span class="mark-tag">5 Marks</span></div>
+      </div>
+      <div class="chevron">▾</div>
+    </div>
+    <div class="q-answer">
+      <ul class="ans-list">
+        <li><span class="bullet">1</span><div><span class="li-title">Global Reach</span> – Only 25% of internet users speak English. Multilingual content reaches the other 75%</div></li>
+        <li><span class="bullet t">2</span><div><span class="li-title t">Better User Experience</span> – Users prefer reading content in their native language; builds trust</div></li>
+        <li><span class="bullet p">3</span><div><span class="li-title p">SEO Benefits</span> – Rank in search engines of different countries with local language keywords</div></li>
+        <li><span class="bullet o">4</span><div><span class="li-title o">Legal Compliance</span> – Some countries require government/business websites in local language</div></li>
+        <li><span class="bullet">5</span><div><span class="li-title">Competitive Advantage</span> – Stand out in markets where competitors offer only one language</div></li>
+        <li><span class="bullet t">6</span><div><span class="li-title t">Cultural Inclusion</span> – Shows respect for diversity and different cultures</div></li>
+        <li><span class="bullet p">7</span><div><span class="li-title p">Increased Sales/Conversions</span> – People buy more when they understand the content in their language</div></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Q4b -->
+  <div class="q-card" id="q-p2-4b" onclick="toggle(this)">
+    <div class="q-header">
+      <div class="q-num">4b</div>
+      <div class="q-text">
+        <strong>What are the common challenges in maintaining a wikisite over time?</strong>
+        <div class="q-meta"><span class="mark-tag">5 Marks</span></div>
+      </div>
+      <div class="chevron">▾</div>
+    </div>
+    <div class="q-answer">
+      <ul class="ans-list">
+        <li><span class="bullet">1</span><div><span class="li-title">Vandalism & Spam</span> – Malicious users deliberately add false or offensive content</div></li>
+        <li><span class="bullet t">2</span><div><span class="li-title t">Content Accuracy</span> – Difficult to verify all facts edited by anonymous users</div></li>
+        <li><span class="bullet p">3</span><div><span class="li-title p">Keeping Content Updated</span> – Information becomes outdated; requires constant review</div></li>
+        <li><span class="bullet o">4</span><div><span class="li-title o">Orphaned Pages</span> – Pages with no links to them, lost in the wiki's structure</div></li>
+        <li><span class="bullet">5</span><div><span class="li-title">Inconsistent Formatting</span> – Different editors use different styles, making wiki look unprofessional</div></li>
+        <li><span class="bullet t">6</span><div><span class="li-title t">User Conflicts</span> – "Edit wars" between users with different opinions on content</div></li>
+        <li><span class="bullet p">7</span><div><span class="li-title p">Spam Accounts</span> – Bots and spammers creating fake user accounts</div></li>
+        <li><span class="bullet o">8</span><div><span class="li-title o">Software Maintenance</span> – Regular updates to wiki software and plugins needed</div></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Q4c -->
+  <div class="q-card" id="q-p2-4c" onclick="toggle(this)">
+    <div class="q-header">
+      <div class="q-num">4c</div>
+      <div class="q-text">
+        <strong>Explain the role of permission and access control in a wikisite.</strong>
+        <div class="q-meta"><span class="mark-tag">4 Marks</span></div>
+      </div>
+      <div class="chevron">▾</div>
+    </div>
+    <div class="q-answer">
+      <div class="ans-intro"><b>Permission and access control</b> in a wikisite determines who can view, create, edit, or delete content, maintaining quality and security.</div>
+      <h3>User Roles & Permissions:</h3>
+      <ul class="ans-list">
+        <li><span class="bullet">1</span><div><span class="li-title">Anonymous/Visitor</span> – Can only read public content, cannot edit</div></li>
+        <li><span class="bullet t">2</span><div><span class="li-title t">Registered User</span> – Can create and edit pages after registration</div></li>
+        <li><span class="bullet p">3</span><div><span class="li-title p">Moderator/Reviewer</span> – Reviews and approves edits before they go live</div></li>
+        <li><span class="bullet o">4</span><div><span class="li-title o">Administrator</span> – Full access: manage users, delete pages, configure settings</div></li>
+      </ul>
+      <h3 class="t">Security Controls:</h3>
+      <ul class="ans-list">
+        <li><span class="bullet t">•</span><div>IP blocking to prevent repeat vandals</div></li>
+        <li><span class="bullet t">•</span><div>CAPTCHA for new user registration</div></li>
+        <li><span class="bullet t">•</span><div>Page protection (lock important pages)</div></li>
+        <li><span class="bullet t">•</span><div>Moderation mode for new/unverified users</div></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Q4d -->
+  <div class="q-card" id="q-p2-4d" onclick="toggle(this)">
+    <div class="q-header">
+      <div class="q-num">4d</div>
+      <div class="q-text">
+        <strong>What is CSS, and what is its role in website design?</strong>
+        <div class="q-meta"><span class="mark-tag">6 Marks</span></div>
+      </div>
+      <div class="chevron">▾</div>
+    </div>
+    <div class="q-answer">
+      <div class="ans-intro"><b>CSS (Cascading Style Sheets)</b> is a stylesheet language that controls how HTML elements are displayed on screen. It separates content (HTML) from presentation (visual styling).</div>
+      <h3>Role in Website Design:</h3>
+      <ul class="ans-list">
+        <li><span class="bullet">1</span><div><span class="li-title">Layout Control</span> – Flexbox and Grid create structured page layouts</div></li>
+        <li><span class="bullet t">2</span><div><span class="li-title t">Colors & Backgrounds</span> – background-color, color, gradient, background-image</div></li>
+        <li><span class="bullet p">3</span><div><span class="li-title p">Typography</span> – font-family, font-size, font-weight, line-height, letter-spacing</div></li>
+        <li><span class="bullet o">4</span><div><span class="li-title o">Spacing</span> – margin (outside element), padding (inside element)</div></li>
+        <li><span class="bullet">5</span><div><span class="li-title">Responsive Design</span> – @media queries adapt layout for mobile, tablet, desktop</div></li>
+        <li><span class="bullet t">6</span><div><span class="li-title t">Animations</span> – transition and @keyframes for interactive effects</div></li>
+        <li><span class="bullet p">7</span><div><span class="li-title p">Consistency</span> – External CSS file applies same style across all pages of website</div></li>
+      </ul>
+      <div class="tip-box">Three types: Inline CSS (style=""), Internal CSS (&lt;style&gt; tag), External CSS (.css file linked)</div>
+    </div>
+  </div>
+
+  <!-- Q5a -->
+  <div class="q-card" id="q-p2-5a" onclick="toggle(this)">
+    <div class="q-header">
+      <div class="q-num">5a</div>
+      <div class="q-text">
+        <strong>Why are blogs valuable for online content creation and communication?</strong>
+        <div class="q-meta"><span class="mark-tag">5 Marks</span></div>
+      </div>
+      <div class="chevron">▾</div>
+    </div>
+    <div class="q-answer">
+      <ul class="ans-list">
+        <li><span class="bullet">1</span><div><span class="li-title">Knowledge Sharing</span> – Share expertise, tutorials, and information with a wide audience</div></li>
+        <li><span class="bullet t">2</span><div><span class="li-title t">SEO Benefits</span> – Fresh, keyword-rich blog content improves Google search ranking</div></li>
+        <li><span class="bullet p">3</span><div><span class="li-title p">Community Building</span> – Comments section creates dialogue between author and readers</div></li>
+        <li><span class="bullet o">4</span><div><span class="li-title o">Personal Branding</span> – Establishes author as an expert in their field</div></li>
+        <li><span class="bullet">5</span><div><span class="li-title">Business Marketing</span> – Drives traffic to business website, generates leads</div></li>
+        <li><span class="bullet t">6</span><div><span class="li-title t">Monetization</span> – Earn through Google AdSense, sponsored posts, affiliate marketing</div></li>
+        <li><span class="bullet p">7</span><div><span class="li-title p">Low Cost</span> – Starting a blog is very affordable; free platforms available</div></li>
+        <li><span class="bullet o">8</span><div><span class="li-title o">Documenting Ideas</span> – Acts as a digital journal or portfolio</div></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Q5b -->
+  <div class="q-card" id="q-p2-5b" onclick="toggle(this)">
+    <div class="q-header">
+      <div class="q-num">5b</div>
+      <div class="q-text">
+        <strong>What are the different formats available for E-Publications?</strong>
+        <div class="q-meta"><span class="mark-tag">5 Marks</span></div>
+      </div>
+      <div class="chevron">▾</div>
+    </div>
+    <div class="q-answer">
+      <ul class="ans-list">
+        <li><span class="bullet">1</span><div><span class="li-title">PDF (Portable Document Format)</span> – Fixed layout, preserves formatting, universally supported, easy to print. Best for reports and textbooks.</div></li>
+        <li><span class="bullet t">2</span><div><span class="li-title t">EPUB (Electronic Publication)</span> – Reflowable text, adjusts to screen size, standard format for most e-readers. Open standard by IDPF.</div></li>
+        <li><span class="bullet p">3</span><div><span class="li-title p">MOBI</span> – Amazon Kindle's original format. Limited to Kindle devices and apps.</div></li>
+        <li><span class="bullet o">4</span><div><span class="li-title o">AZW3 (Kindle Format 8)</span> – Advanced Amazon format with better CSS support, replacing MOBI.</div></li>
+        <li><span class="bullet">5</span><div><span class="li-title">HTML</span> – Web-based, fully interactive, supports multimedia. Accessed via browsers.</div></li>
+        <li><span class="bullet t">6</span><div><span class="li-title t">TXT</span> – Plain text, smallest file size, no formatting. Used for simple documents.</div></li>
+        <li><span class="bullet p">7</span><div><span class="li-title p">DOCX</span> – Editable Microsoft Word format. Often used before converting to other formats.</div></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Q5c -->
+  <div class="q-card" id="q-p2-5c" onclick="toggle(this)">
+    <div class="q-header">
+      <div class="q-num">5c</div>
+      <div class="q-text">
+        <strong>Describe the steps involved in creating a new course on Moodle.</strong>
+        <div class="q-meta"><span class="mark-tag">5 Marks</span></div>
+      </div>
+      <div class="chevron">▾</div>
+    </div>
+    <div class="q-answer">
+      <div class="ans-intro">Same as Q4b Paper 1 – Moodle course creation steps.</div>
+      <div class="step-list">
+        <div class="step"><div class="step-num">1</div><div>Login as Administrator or Teacher to Moodle</div></div>
+        <div class="step"><div class="step-num">2</div><div>Navigate to <b>Site Administration → Courses → Add New Course</b></div></div>
+        <div class="step"><div class="step-num">3</div><div>Enter: Full course name, Short name, Course ID</div></div>
+        <div class="step"><div class="step-num">4</div><div>Select course category (e.g., BCA, Science)</div></div>
+        <div class="step"><div class="step-num">5</div><div>Set course start date and end date</div></div>
+        <div class="step"><div class="step-num">6</div><div>Choose format: Weekly / Topics based</div></div>
+        <div class="step"><div class="step-num">7</div><div>Configure enrollment: self-enroll / manual / guest access</div></div>
+        <div class="step"><div class="step-num">8</div><div>Save and configure course sections</div></div>
+        <div class="step"><div class="step-num">9</div><div>Turn editing on → Add resources (PDF, video) and activities (Quiz, Forum, Assignment)</div></div>
+        <div class="step"><div class="step-num">10</div><div>Enroll students → Course is live!</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q5d -->
+  <div class="q-card" id="q-p2-5d" onclick="toggle(this)">
+    <div class="q-header">
+      <div class="q-num">5d</div>
+      <div class="q-text">
+        <strong>Compare and contrast different screen casting tools.</strong>
+        <div class="q-meta"><span class="mark-tag">5 Marks</span></div>
+      </div>
+      <div class="chevron">▾</div>
+    </div>
+    <div class="q-answer">
+      <table class="compare-table">
+        <tr><th>Tool</th><th>Cost</th><th>Pros</th><th>Cons</th><th>Best For</th></tr>
+        <tr><td><b>OBS Studio</b></td><td>Free</td><td>Professional quality, streaming support, no watermark</td><td>Steep learning curve</td><td>YouTubers, streamers</td></tr>
+        <tr><td><b>Camtasia</b></td><td>Paid ($249)</td><td>Easy to use, built-in editor, annotations</td><td>Expensive</td><td>Corporate training</td></tr>
+        <tr><td><b>Loom</b></td><td>Free/Paid</td><td>Instant share link, webcam overlay, simple</td><td>Limited editing</td><td>Quick team updates</td></tr>
+        <tr><td><b>Screencast-O-Matic</b></td><td>Free/Paid</td><td>Simple interface, beginner friendly</td><td>Watermark on free</td><td>Students, teachers</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- PART B -->
+  <div class="section-header">
+    <h2>Part – B</h2>
+    <span class="section-pill part-b">5 × 2 = 10 Marks (any 5)</span>
+  </div>
+
+  <div class="q-card" id="q-p2-6" onclick="toggle(this)">
+    <div class="q-header">
+      <div class="q-num short-num">6</div>
+      <div class="q-text">
+        <strong>Define content and mention different types of content used in website development.</strong>
+        <div class="q-meta"><span class="mark-tag">2 Marks</span></div>
+      </div>
+      <div class="chevron">▾</div>
+    </div>
+    <div class="q-answer">
+      <div class="ans-intro"><b>Content</b> is any information or media presented on a website to inform, entertain, or engage visitors.</div>
+      <div style="display:flex;flex-wrap:wrap;gap:6px;margin:8px 0">
+        <span class="key-point">Text/Articles</span>
+        <span class="key-point t">Images/Graphics</span>
+        <span class="key-point p">Videos</span>
+        <span class="key-point">Audio/Podcasts</span>
+        <span class="key-point t">Infographics</span>
+        <span class="key-point p">Interactive Forms</span>
+        <span class="key-point">User Reviews</span>
+        <span class="key-point t">Animations</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-card" id="q-p2-7" onclick="toggle(this)">
+    <div class="q-header">
+      <div class="q-num short-num">7</div>
+      <div class="q-text">
+        <strong>What is web hosting? Why is it essential for websites?</strong>
+        <div class="q-meta"><span class="mark-tag">2 Marks</span></div>
+      </div>
+      <div class="chevron">▾</div>
+    </div>
+    <div class="q-answer">
+      <div class="ans-intro"><b>Web hosting</b> is a service that provides server space and internet connectivity to store website files and make them accessible online 24/7.</div>
+      <ul class="ans-list">
+        <li><span class="bullet t">•</span><div>Without hosting, a website cannot be accessed on the internet</div></li>
+        <li><span class="bullet t">•</span><div>Provides storage for HTML, CSS, images, databases, and email</div></li>
+        <li><span class="bullet t">•</span><div>Ensures uptime, speed, security, and technical support</div></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="q-card" id="q-p2-8" onclick="toggle(this)">
+    <div class="q-header">
+      <div class="q-num short-num">8</div>
+      <div class="q-text">
+        <strong>What is a Wikisite? How does it differ from traditional website?</strong>
+        <div class="q-meta"><span class="mark-tag">2 Marks</span></div>
+      </div>
+      <div class="chevron">▾</div>
+    </div>
+    <div class="q-answer">
+      <table class="compare-table">
+        <tr><th>Wikisite</th><th>Traditional Website</th></tr>
+        <tr><td>Multiple users can edit content</td><td>Only webmaster/admin can edit</td></tr>
+        <tr><td>Collaborative content creation</td><td>Controlled content publishing</td></tr>
+        <tr><td>Has version history/revision tracking</td><td>No built-in revision history</td></tr>
+        <tr><td>Example: Wikipedia</td><td>Example: Company website, blog</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="q-card" id="q-p2-9" onclick="toggle(this)">
+    <div class="q-header">
+      <div class="q-num short-num">9</div>
+      <div class="q-text">
+        <strong>Discuss the importance of planning and scripting before recording a screencart.</strong>
+        <div class="q-meta"><span class="mark-tag">2 Marks</span></div>
+      </div>
+      <div class="chevron">▾</div>
+    </div>
+    <div class="q-answer">
+      <ul class="ans-list">
+        <li><span class="bullet">1</span><div><b>Clear Structure</b> – Planning ensures content flows logically</div></li>
+        <li><span class="bullet t">2</span><div><b>Saves Time</b> – Reduces re-recording due to mistakes or missing content</div></li>
+        <li><span class="bullet p">3</span><div><b>Professional Quality</b> – Script prevents "umm," "ahh," long pauses</div></li>
+        <li><span class="bullet o">4</span><div><b>Time Management</b> – Keep the video within target duration</div></li>
+      </ul>
+      <div class="tip-box">Steps: Define goal → Write script → Create storyboard → Setup recording environment → Do trial run</div>
+    </div>
+  </div>
+
+  <div class="q-card" id="q-p2-10" onclick="toggle(this)">
+    <div class="q-header">
+      <div class="q-num short-num">10</div>
+      <div class="q-text">
+        <strong>Explore the use of CSS in styling webpages.</strong>
+        <div class="q-meta"><span class="mark-tag">2 Marks</span></div>
+      </div>
+      <div class="chevron">▾</div>
+    </div>
+    <div class="q-answer">
+      <div class="ans-intro">CSS styles HTML elements by controlling their visual appearance on webpages.</div>
+      <div style="display:flex;flex-wrap:wrap;gap:6px;margin:8px 0">
+        <span class="key-point">Colors & Fonts</span>
+        <span class="key-point t">Layout (Flex/Grid)</span>
+        <span class="key-point p">Spacing (Margin/Padding)</span>
+        <span class="key-point">Responsive Design</span>
+        <span class="key-point t">Animations</span>
+        <span class="key-point p">Hover Effects</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-card" id="q-p2-11" onclick="toggle(this)">
+    <div class="q-header">
+      <div class="q-num short-num">11</div>
+      <div class="q-text">
+        <strong>How does social media integration contribute to blog promotion and visibility?</strong>
+        <div class="q-meta"><span class="mark-tag">2 Marks</span></div>
+      </div>
+      <div class="chevron">▾</div>
+    </div>
+    <div class="q-answer">
+      <ul class="ans-list">
+        <li><span class="bullet">1</span><div><b>Share Buttons</b> – Readers can share posts to Facebook, Twitter, WhatsApp instantly</div></li>
+        <li><span class="bullet t">2</span><div><b>Auto-posting</b> – New blog posts automatically shared on social media accounts</div></li>
+        <li><span class="bullet p">3</span><div><b>Social Login</b> – Users comment using Facebook/Google login (easier engagement)</div></li>
+        <li><span class="bullet o">4</span><div><b>Increased Traffic</b> – Social shares drive new visitors to blog</div></li>
+        <li><span class="bullet">5</span><div><b>Social Proof</b> – Like/share counts build credibility</div></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="q-card" id="q-p2-12" onclick="toggle(this)">
+    <div class="q-header">
+      <div class="q-num short-num">12</div>
+      <div class="q-text">
+        <strong>Describe the role of metadata in e-publication management and distribution.</strong>
+        <div class="q-meta"><span class="mark-tag">2 Marks</span></div>
+      </div>
+      <div class="chevron">▾</div>
+    </div>
+    <div class="q-answer">
+      <div class="ans-intro"><b>Metadata</b> is data about data — descriptive information about an e-publication that helps in its discovery, management, and distribution.</div>
+      <div style="display:flex;flex-wrap:wrap;gap:6px;margin:8px 0">
+        <span class="key-point">Title & Author</span>
+        <span class="key-point t">ISBN/ISSN</span>
+        <span class="key-point p">Publication Date</span>
+        <span class="key-point">Genre & Keywords</span>
+        <span class="key-point t">Language</span>
+        <span class="key-point p">Rights/License Info</span>
+      </div>
+      <ul class="ans-list">
+        <li><span class="bullet t">•</span><div>Helps search engines and libraries catalog and index publications</div></li>
+        <li><span class="bullet t">•</span><div>Enables DRM (Digital Rights Management) enforcement</div></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="q-card" id="q-p2-13" onclick="toggle(this)">
+    <div class="q-header">
+      <div class="q-num short-num">13</div>
+      <div class="q-text">
+        <strong>Differentiate Drupal and WordPress Content Management Systems.</strong>
+        <div class="q-meta"><span class="mark-tag">2 Marks</span></div>
+      </div>
+      <div class="chevron">▾</div>
+    </div>
+    <div class="q-answer">
+      <table class="compare-table">
+        <tr><th>Feature</th><th>WordPress</th><th>Drupal</th></tr>
+        <tr><td>Ease of Use</td><td>Very easy, beginner friendly</td><td>Complex, developer-focused</td></tr>
+        <tr><td>Plugins</td><td>50,000+ plugins</td><td>Modules (fewer but powerful)</td></tr>
+        <tr><td>Security</td><td>Moderate</td><td>Very High (used by NASA, govt)</td></tr>
+        <tr><td>Best For</td><td>Blogs, small-medium sites</td><td>Large enterprise, complex sites</td></tr>
+        <tr><td>Community</td><td>Largest community</td><td>Smaller, developer community</td></tr>
+        <tr><td>Multilingual</td><td>Via plugins (WPML)</td><td>Built-in support</td></tr>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div style="text-align:center;padding:30px 20px;color:var(--muted);font-size:12px;border-top:1px solid var(--border);margin-top:20px">
+  <div style="font-family:'Playfair Display',serif;font-size:20px;color:var(--gold);margin-bottom:8px">All the Best! 🎯</div>
+  BCA 6th Sem · Web Content Management Systems · May 2026 Exam<br>
+  <span style="color:var(--teal)">Study smart, write confidently ✨</span>
+</div>
+
+<script>
+  function toggle(card) {
+    card.classList.toggle('open');
+  }
+
+  function switchPaper(id) {
+    document.querySelectorAll('.paper-content').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.paper-tab').forEach(t => t.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    const idx = id === 'p1' ? 0 : 1;
+    document.querySelectorAll('.paper-tab')[idx].classList.add('active');
+  }
+
+  function expandAll(paperId) {
+    document.querySelectorAll(`#${paperId} .q-card`).forEach(c => c.classList.add('open'));
+  }
+
+  function searchQuestions() {
+    const query = document.getElementById('searchInput').value.toLowerCase().trim();
+    ['p1','p2'].forEach(pid => {
+      const cards = document.querySelectorAll(`#${pid} .q-card`);
+      let found = 0;
+      cards.forEach(card => {
+        const text = card.innerText.toLowerCase();
+        if (!query || text.includes(query)) {
+          card.classList.remove('hidden');
+          if (query) card.classList.add('open');
+          found++;
+        } else {
+          card.classList.add('hidden');
+          card.classList.remove('open');
+        }
+      });
+      const nr = document.getElementById(`no-results-${pid}`);
+      nr.style.display = (found === 0 && query) ? 'block' : 'none';
+    });
+
+    if (query) {
+      // Auto-switch to paper that has results
+      const p1Found = document.querySelectorAll('#p1 .q-card:not(.hidden)').length;
+      const p2Found = document.querySelectorAll('#p2 .q-card:not(.hidden)').length;
+      if (p1Found === 0 && p2Found > 0) switchPaper('p2');
+      else if (p2Found === 0 && p1Found > 0) switchPaper('p1');
+    }
+  }
+</script>
+</body>
+</html>
